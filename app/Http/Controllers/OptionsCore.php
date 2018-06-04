@@ -34,6 +34,7 @@ class OptionsCore extends Controller
         $dubbeleboekingen = DB::table('options')->where('id', 5)->value('value');
         $incltouristtax = DB::table('options')->where('id', 14)->value('value');
         $facebookauth = DB::table('options')->where('id', 15)->value('value');
+        $taxtype = DB::table('options')->where('id', 16)->value('value');
         $reservations = DB::table('reservations')->orderBy('created_at', 'desc')->first();
         $occupied_weeks = DB::table("occupied_weeks")->get();
         $autoarchive = 1;
@@ -49,7 +50,8 @@ class OptionsCore extends Controller
             'occupied_weeks',
             'autoarchive',
             'facebookauth',
-            'incltouristtax'
+            'incltouristtax',
+            'taxtype'
         ));
     }
 
@@ -64,6 +66,7 @@ class OptionsCore extends Controller
         $autoarchive = (isset($optionsData['autoarchive'])) ? 1 : 0;
         $facebookauth = (isset($optionsData['facebookauth'])) ? 1 : 0;
         $incltouristtax = (isset($optionsData['incltouristtax'])) ? 1 : 0;
+        $taxtype = (isset($optionsData['taxtype'])) ? 1 : 0;
                
         DB::table('options')->where('id', 3)->update(['value' => $ronde1]);
         DB::table('options')->where('id', 4)->update(['value' => $ronde2]);
@@ -72,6 +75,8 @@ class OptionsCore extends Controller
         DB::table('options')->where('id', 6)->update(['value' => $autoarchive]);
         DB::table('options')->where('id', 14)->update(['value' => $incltouristtax]);
         DB::table('options')->where('id', 15)->update(['value' => $facebookauth]);
+        DB::table('options')->where('id', 16)->update(['value' => $taxtype]);
+
 
         $request->session()->flash('message', 'Instellingen zijn opgeslagen.');
         return redirect('/admin/options');

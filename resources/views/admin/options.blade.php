@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-            {{-- <div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-heading-meldingen">Systeem Opties:</div>
 
                     <div class="panel-body-adminreserveringen">
@@ -232,7 +232,7 @@
                             <div class="form-group">
                                 <label class="form-switch">
                                     <input checked type="checkbox" name="incltouristtax">
-                                    <i class="form-icon"></i> Toeristenbelasting Incl
+                                    <i class="form-icon"></i> Toeristenbelasting Excl
                                 </label>
                                 <div class="popover popover-top">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -240,11 +240,11 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="card-title h5">
-                                                    Toeristenbelasting Inclusief
+                                                    Toeristenbelasting Exclusief
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                Als u deze optie aan zet dan zullende totaalprijzen inclusief toeristenbelasting zijn. De toeristenbelasting kan per locatie verschillend zijn.
+                                                Als u deze optie aan zet dan zullende totaalprijzen exclusief toeristenbelasting zijn. De toeristenbelasting kan per locatie verschillend zijn.
                                             </div>
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@
                             <div class="form-group">
                                 <label class="form-switch">
                                     <input type="checkbox" name="incltouristtax">
-                                    <i class="form-icon"></i> Toeristenbelasting Incl
+                                    <i class="form-icon"></i> Toeristenbelasting Excl
                                 </label>
                                 <div class="popover popover-top">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -262,17 +262,26 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <div class="card-title h5">
-                                                    Toeristenbelasting Inclusief
+                                                    Toeristenbelasting Exclusief
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                Als u deze optie aan zet dan zullende totaalprijzen inclusief toeristenbelasting zijn. De toeristenbelasting kan per locatie verschillend zijn.
+                                                Als u deze optie aan zet dan zullende totaalprijzen exclusief toeristenbelasting zijn. De toeristenbelasting kan per locatie verschillend zijn.
                                             </div>
                                         </div>
                                     </div>
                                  </div>
                             </div>
                         @endif
+                        <select required="" class="" name="taxtype">
+                            @if ($taxtype == null)
+                                <option selected hidden value="">Maak een keuze</option>
+                            @else
+                                <option selected hidden value="{{$taxtype}}">{{$taxtype}}</option>
+                            @endif
+                            <option value='per week'>Per Week</option>
+                            <option value='p.p.p.n'>Per Persoon Per Nacht</option>
+                        </select>
 
                         <hr>
 
@@ -281,7 +290,7 @@
                         <button type="submit" class="btn btn-primary submit-btn" id="reservation-toewijs-button">Instellingen opslaan</button>
                     </form>
                     
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

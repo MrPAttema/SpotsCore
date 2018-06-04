@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <div class="slide-upper">
                                     <div class="form-group">
-                                        <label for="res_week1">Selecteer uw eerste voorkeursweek:</label>
+                                        <label id="res_week1" for="res_week1">Selecteer uw eerste voorkeursweek:</label>
                                         <select required="" class="" name="res_week1">
                                             <option selected hidden value="">Maak een keuze</option>
                                             @foreach ($weeks as $week)
@@ -78,9 +78,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <hr>
                             </div>
                             @endif
-                            <hr>
                             <button type="button" onclick="history.go(-1);" class="btn bottom-10"><i class="fa fa-arrow-left" aria-hidden="true"></i> Terug naar stap 1</button>
                             <button type="post" class="btn btn-primary button-left bottom-10"><i class="fa fa-arrow-right" aria-hidden="true"></i> Verder naar stap 3</button>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -100,7 +100,7 @@
                         Prijs: <b>&euro; <span id="priceOne">..</span>,-</b> per week.
                         @if ($touristTax == 1)
                             <div class="location-toerist-tax">
-                                + Toeristenbelasting: &euro; {{$Location->location_tax}} p.p.p.n.
+                                Excl toeristenbelasting: &euro; {{$location->location_tax}} {{$taxtype}}
                             </div>
                         @endif
                     </div>
@@ -113,7 +113,7 @@
                         <b>&euro; <span id="priceTwo">..</span>,-</b> per week.
                         @if ($touristTax == 1)
                             <div class="location-toerist-tax">
-                                + Toeristenbelasting: &euro; {{$Location->location_tax}} p.p.p.n.
+                                Excl toeristenbelasting: &euro; {{$location->location_tax}} {{$taxtype}}
                             </div>
                         @endif
                     </div>

@@ -63,6 +63,7 @@ class ReservationController extends Controller
 
         $ronde1 = DB::table('options')->where('id', 3)->value('value');
         $ronde2 = DB::table('options')->where('id', 4)->value('value');
+        $taxtype = DB::table('options')->where('id', 16)->value('value');
 
         if ( ($ronde1 == 1) || ($ronde2 = 1) ) {
 
@@ -103,7 +104,7 @@ class ReservationController extends Controller
             $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price');
             $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
 
-            return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate'));
+            return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate', 'taxtype'));
 
         } else {
 

@@ -1054,7 +1054,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#two_weeks").change(function () {
-        // $("#second-week").hide(150);
+        $("#res_week1").html('Selecteer uw vertrek week:');
+        $("#second-week").toggle(150);
     });
 });
 
