@@ -57,13 +57,13 @@
                             </div>
                             <div class="form-group col-12 centered">
                                 <label class="form-checkbox">
-                                    <input type="checkbox">
-                                    <i class="form-icon" checked type="checkbox" name="remember"></i> Ik wil twee weken achter elkaar.
+                                    <input type="checkbox" id="two_weeks">
+                                    <i class="form-icon" checked type="checkbox" ></i> Ik wil twee weken achter elkaar.
                                 </label>
                             </div>
                             <hr>
                             @if (($ronde2) == 0)
-                            <div class="form-group second-week">
+                            <div class="form-group" id="second-week">
                                 <div class="slide-upper">
                                    <label for="res_week2">Selecteer voorkeursweek twee:</label>
                                     <select required="" class="" name="res_week2">

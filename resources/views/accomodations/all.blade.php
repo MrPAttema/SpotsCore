@@ -51,9 +51,9 @@
                        {{--  <img src="{{URL::asset('img/vlieland1.jpg')}}" class="img-responsive">  --}}
                     </div>
                     <div class="card-header">
-                        <div class="card-title h5">{{$Location->location_name}}, {{$Location->location_location}}</div>
+                        <div class="card-title h5">{{$Location->location_name}}</div>
                         <div class="card-subtitle text-gray">
-                            Een leuk huisje gelegen te {{$Location->location_location}}.
+                            Gelegen in/op {{$Location->location_location}}.
                         </div>
                         @if (($Location->change_day) == 5)
                             <span>Wisseldag is: <b>Vrijdag</b></span>

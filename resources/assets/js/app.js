@@ -92,3 +92,10 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function() {
+    $("#two_weeks").change(function() {
+        // $("#second-week").hide(150);
+    });
+});
+

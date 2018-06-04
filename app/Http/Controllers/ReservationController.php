@@ -141,29 +141,23 @@ class ReservationController extends Controller
 
     public function store(Request $request) {
 
-        // Get the current logged in user
         $user_id = Auth::id();
         $user = User::find($user_id);
 
-        // Get all the user inputs
         $request = $request->all();
         $res_year = $request['res_year'];
         $res_location_id = $request['location_id'];
 
-        // Grab some user data from the database
         $worklocation = DB::table('users')->where('id', $user_id)->value('work_location');
 
-        // Now we get settings from the database
         $autotoewijzen = DB::table('options')->where('id', 2)->value('value');
         $ronde1 = DB::table('options')->where('id', 3)->value('value');
         $ronde2 = DB::table('options')->where('id', 4)->value('value');
         $dubbeleboekingen = DB::table('options')->where('id', 5)->value('value');         
 
-        // Let's check if the user is allowed to make some input
         $bezetCheck = DB::table("occupied_weeks_$res_year")->where('week', $request['res_week1'])->value('bezet');
         $dubbleCheck = DB::table('reservations')->where('user_id', $user_id)->where('res_year', $res_year)->where('res_status', 1)->get();
 
-        // First we check if the week selected week is available
         if ($bezetCheck == 1)  {
 
             Session::flash('error', 'Week '. $request['res_week1'] .' is al uitgegeven. Onze excuuses voor het ongemak.');
