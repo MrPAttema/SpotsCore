@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </form>
-            <form method="POST" class="" action="{{ action('SearchController@inputStatus') }}"
+            {{-- <form method="POST" class="" action="{{ action('SearchController@inputStatus') }}" --}}
                 <div class="status-search">
                     <div class="status-sorting">
                         <span><b>Status</b></span>

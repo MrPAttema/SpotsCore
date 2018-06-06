@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use DB;
+use Crypt;
+use App;
 
 class MadeReservation extends Notification
 {
@@ -52,7 +54,6 @@ class MadeReservation extends Notification
 
         $url = url('/reservations/myreservations');
         return (new MailMessage)
-        ->cc('bestuur@belboeivlieland.nl')
         ->greeting('Bedankt voor uw reservering!')
         ->subject($appName.' - Uw nieuwe reservering')
         ->line('Wij danken u hartelijk voor uw reservering.')
@@ -72,11 +73,12 @@ class MadeReservation extends Notification
      * @return array
      */
     public function toDatabase($notifiable)
-    {
+    {    
         return [
             'id' => $notifiable->id,
             'reservation_id' => $this->reservation->id,
             'location_id' => $this->reservation->location_id,
         ];
     }
+
 }

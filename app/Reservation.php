@@ -11,7 +11,8 @@ class Reservation extends Model
 
     protected $fillable = [
 
-        'user_id', 
+        'user_id',
+        'reservation_id',
         'phone', 
         'adress', 
         'postcode', 
@@ -39,11 +40,11 @@ class Reservation extends Model
 
     public function payment()
     {
-        return $this->hasOne('App\Payment', 'reservation_id');
+        return $this->hasOne('App\Payment', 'reservation_id', 'reservation_id');
     }
 
     public function touristtax()
     {
-        return $this->hasOne('App\Touristtax', 'reservation_id');
+        return $this->hasOne('App\Touristtax', 'reservation_id', 'reservation_id');
     }
 }

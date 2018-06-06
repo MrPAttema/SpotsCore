@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App;
+use Crypt;
 use Session;
 use Validator;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\MadeReservation;
 use App\Notifications\ReservationAssign;
+use App\Notifications\MadeReservation as Mailable;
 use Illuminate\Notifications\Notifiable;
 use App\User;
 use App\Payment;
@@ -144,9 +146,9 @@ class ReservationController extends Controller
 
         $user_id = Auth::id();
         $user = User::find($user_id);
-
         $request = $request->all();
         $res_year = $request['res_year'];
+        $res_week1 = $request['res_week1'];
         $res_location_id = $request['location_id'];
 
         $worklocation = DB::table('users')->where('id', $user_id)->value('work_location');
@@ -154,7 +156,9 @@ class ReservationController extends Controller
         $autotoewijzen = DB::table('options')->where('id', 2)->value('value');
         $ronde1 = DB::table('options')->where('id', 3)->value('value');
         $ronde2 = DB::table('options')->where('id', 4)->value('value');
-        $dubbeleboekingen = DB::table('options')->where('id', 5)->value('value');         
+        $dubbeleboekingen = DB::table('options')->where('id', 5)->value('value');       
+        
+        $reservation_id = "$res_year$res_location_id$res_week1";
 
         $bezetCheck = DB::table("occupied_weeks_$res_year")->where('week', $request['res_week1'])->value('bezet');
         $dubbleCheck = DB::table('reservations')->where('user_id', $user_id)->where('res_year', $res_year)->where('res_status', 1)->get();
@@ -175,7 +179,7 @@ class ReservationController extends Controller
 
                 $res_status = 0;
                 $res_ronde = 1;
-                $res_week1 = $request['res_week1'];
+                $res_week1 = $res_week1;
                 $res_week2 = $request['res_week2'];
                 $res_week3 = 0;
                 $res_toegewezen_week = 0;
@@ -189,7 +193,7 @@ class ReservationController extends Controller
                     $res_ronde = 2;
                     $res_week1 = 0;
                     $res_week2 = 0;
-                    $res_week3 = $request['res_week1'];
+                    $res_week3 = $res_week1;
                     $res_toegewezen_week = 0;
                     $bezet = 0;  
 
@@ -200,8 +204,8 @@ class ReservationController extends Controller
                     $res_ronde = 2;
                     $res_week1 = 0;
                     $res_week2 = 0;
-                    $res_week3 = $request['res_week1'];
-                    $res_toegewezen_week = $request['res_week1'];
+                    $res_week3 = $res_week1;
+                    $res_toegewezen_week = $res_week1;
                     $bezet = 1;
 
                 } elseif ($autotoewijzen == 0) {
@@ -210,7 +214,7 @@ class ReservationController extends Controller
                     $res_ronde = 2;
                     $res_week1 = 0;
                     $res_week2 = 0;
-                    $res_week3 = $request['res_week1'];
+                    $res_week3 = $res_week1;
                     $res_toegewezen_week = 0;
                     $bezet = 0;
                 }
@@ -223,6 +227,7 @@ class ReservationController extends Controller
 
             $reservation = App\Reservation::create([
                 'user_id' => $user_id,
+                'reservation_id' => $reservation_id,
                 'location_id' => $request['location_id'],
                 'res_week1' => $request['res_week1'],
                 'res_week2' => $request['res_week2'],
@@ -268,7 +273,10 @@ class ReservationController extends Controller
             $reservation->touristtax()->save($touristtax);
 
             $user = User::find($user_id);
-            $user->notify(New MadeReservation($reservation));
+            (new User)->forceFill([
+                'id' => $user->id,
+                'email' => Crypt::decrypt($user->email),
+            ])->notify(New MadeReservation($reservation));
 
 
             return redirect('/reservations/myreservations');

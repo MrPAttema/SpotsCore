@@ -54,7 +54,10 @@ class AdminReservationsController extends Controller
 
             $user_id = App\Reservation::where('id', $id)->value('user_id');
             $user = User::find($user_id);
-            $user->notify(New ReservationAssign($submission));
+            (new User)->forceFill([
+                'id' => $user->id,
+                'email' => Crypt::decrypt($user->email),
+            ])->notify(New ReservationAssign($submission));
 
             Session::flash('message', 'Reservering #'. $id .' is geupdate.');
             return redirect('/admin/allreservations');
@@ -186,7 +189,10 @@ class AdminReservationsController extends Controller
 
         $user_id = App\Reservation::where('id', $reservation_id)->value('user_id');
         $user = User::find($user_id);
-        $user->notify(New ReservationRejected($submission));
+        (new User)->forceFill([
+            'id' => $user->id,
+            'email' => Crypt::decrypt($user->email),
+        ])->notify(New ReservationRejected($submission));
 
         Session::flash('message', 'Reservering #'. $reservation_id .' is afgewezen.');
         return redirect('/admin/allreservations');
@@ -204,7 +210,10 @@ class AdminReservationsController extends Controller
 
         $user_id = App\Reservation::where('id', $reservation_id)->value('user_id');
         $user = User::find($user_id);
-        $user->notify(New ReservationCancelled($submission));
+        (new User)->forceFill([
+            'id' => $user->id,
+            'email' => Crypt::decrypt($user->email),
+        ])->notify(New ReservationCancelled($submission));
 
         Session::flash('message', 'Reservering #'. $reservation_id .' is geannuleerd.');
         return redirect('/admin/allreservations');
