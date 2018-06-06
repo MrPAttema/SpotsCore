@@ -10,6 +10,7 @@ use App\Adminreservations;
 use App\Reservation;
 use App\User;
 use App;
+use Crypt;
 use Carbon\Carbon;
 use Session;
 use DB;

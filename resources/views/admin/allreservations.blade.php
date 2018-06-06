@@ -66,8 +66,8 @@
                         <td>{{$Reservation->res_week1}}</td>
                         <td>{{$Reservation->res_week2}}</td>
                         <td>{{$Reservation->res_week3}}</td>
-                        <td>{{$Reservation->user->firstname}} {{$Reservation->user->lastname}}</td>
-                        <td>{{$Reservation->user->work_location}}</td>
+                        <td>{{Crypt::decrypt($Reservation->user->firstname)}} {{Crypt::decrypt($Reservation->user->lastname)}}</td>
+                        <td>{{Crypt::decrypt($Reservation->user->work_location)}}</td>
                         <td>
                             @if ($Reservation->res_toegewezen_week == 0)
                               <form method="post" class="form-toewijzen" action="{{ url('/admin/allreservations') }}">
