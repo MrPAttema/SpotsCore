@@ -57,6 +57,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //////////////////////////////// LOGIN OVERRIDE
     $this->get('/login', 'Auth\LoginController@index')->name('login');
+    $this->get('/register', 'Auth\RegisterController@index')->name('register');
 
     //////////////////////////////// ARCHIVE
     Route::get('/archive', 'ArchiveController@index');

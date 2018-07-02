@@ -66,7 +66,11 @@ class LoginController extends Controller
         
         //Get Login Type
         $login_type = $this->getLoginType($loginValue);
- 
+
+        if ($login_type == 'email') {
+            $loginValue = Crypt::encrypt($loginValue);
+        } 
+
         //Change request type based on user input
         $request->merge([
             $login_type => $loginValue
@@ -78,14 +82,14 @@ class LoginController extends Controller
         } 
         return redirect()->back()->withInput()->withErrors([ 'email' => "Deze gegevens komen niet overeen met onze database." ]);
     } 
- 
-    //Check user input type
-    public function getLoginType($loginValue) {
+
+    public function getLoginType($loginValue) 
+    {
         return filter_var($loginValue, FILTER_VALIDATE_EMAIL ) 
-            ? 'email' 
-            : ( (preg_match('%^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$%i', $loginValue)) 
-            ? 'employee_id' 
-            : 'employee_id' );
+        ? 'email' 
+        : ( (preg_match('%^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$%i', $loginValue))
+        ? 'employee_id' 
+        : 'employee_id' );
     }
 
     /**

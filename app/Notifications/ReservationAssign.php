@@ -23,6 +23,7 @@ class ReservationAssign extends Notification
     public function __construct($reservation)
     {
         $this->reservation = $reservation;
+        dd($this->reservation);
     }
 
     /**

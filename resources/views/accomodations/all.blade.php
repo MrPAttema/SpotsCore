@@ -70,9 +70,9 @@
                     </div>    
                     <div class="card-body">
                         Vanaf: <b>&euro; {{$Location->location_price}},-</b> per week
-                        @if ($touristTax == 1)
+                        @if ($touristTax == 0)
                             <div class="location-toerist-tax">
-                                + Toeristenbelasting: &euro; {{$Location->location_tax}} p.p.p.n.
+                                Incl toeristenbelasting: &euro;{{$Location->location_tax}} per week.
                             </div>
                         @endif
                     </div>

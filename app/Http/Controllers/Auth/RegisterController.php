@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -39,6 +40,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function index() {
+
+        $facebookauth = DB::table('options')->where('id', 15)->value('value');
+
+        return view('auth.register', compact('facebookauth')); 
+
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -64,12 +73,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            // 'firstname' => encrypt($data['firstname']),
-            // 'lastname' => encrypt($data['lastname']),
-            // 'email' => encrypt($data['email']),
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'email' => $data['email'],
+            'firstname' => encrypt($data['firstname']),
+            'lastname' => encrypt($data['lastname']),
+            'email' => encrypt($data['email']),
             'password' => bcrypt($data['password']),
         ]);
 

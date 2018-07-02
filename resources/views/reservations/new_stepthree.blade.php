@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="col-6 col-ms-12 centered">
+    <div class="column col-6 col-xs-12 centered">
         <div class="margin-15">
             <h3>
                 Nieuw reservering
@@ -22,12 +22,12 @@
                 </li>
             </ul>
             <div class="divider"></div>
-            <div class="columns">
-                <div class="column col-12 col-xs-12 margin-10">
-                    <p class="reservation-text">Vul in het onderstaande scherm uw gegevens in.</p>
-                    <p class="reservation-text">Uw gegevens zijn nodig op de reservering aan te maken.</p>
-                    <p><i>Als deze reeds voor u ingevuld zijn controleer deze dan nauwkeurig.</i></p>
-                    <br>
+            <div class="columns col-oneline col-gapless">
+                <div class="column col-12 padding-10 centered">
+                    <span class="reservation-text">Vul in het onderstaande scherm uw gegevens in.</span>
+                    <span class="reservation-text">Uw gegevens zijn nodig op de reservering aan te maken.</span>
+                    <span><i>Als deze reeds voor u ingevuld zijn controleer deze dan nauwkeurig.</i></span>
+                    <hr>
                     <form method="post" action="/reservations/new/save" class="user-panel">
                         <div class="form-group">
                             <label for="email">E-mailadres:</label>
@@ -50,7 +50,7 @@
                             <input style="text-transform:uppercase" required type="text" name="postcode" value="{{ Crypt::decrypt(Auth::user()->postcode) }}">
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="email">Werkomgeving:</label>
                             <select class="select work" name="work_location">
                                 @if (Auth::user()->work_location == null)
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label for="email">Afdeling:</label>
                             <input required type="text" name="work_department" value="{{Crypt::decrypt(Auth::user()->work_department) }}">
-                        </div>
+                        </div> --}}
 
                         <hr>
 

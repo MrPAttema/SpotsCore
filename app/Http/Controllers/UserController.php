@@ -30,9 +30,31 @@ class UserController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $users = App\User::where('id', $id)->get();
+        $user = App\User::where('id', $id)->get()->toArray();
+        $user = array_shift($user);
 
-        return view('users.profile', compact('users'));
+        $priority = DB::table('priorities')->where('employee_id', $user['employee_id'])->get()->toArray();
+        $priority = array_shift($priority);
+        $count = 0;
+        if(isset($priority)) {
+            if (end($priority) === 'IN') {
+                $count = 1;
+            } else {            
+                foreach ($priority as $priorityType) {
+                    if ($priorityType === 'UIT') {
+                        $count++;
+                    } elseif (($priorityType === 'IN') || ($priorityType === '0')) {
+                        $count = 0;
+                    }
+                }
+            }
+        }
+        if ($count === 0) {
+            $count++;
+        }
+        $priority = $count;
+
+        return view('users.profile', compact('user', 'priority'));
     }
 
     public function update(Request $request)

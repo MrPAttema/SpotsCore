@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container columns">
+<div class="container columns centered">
     <div class="column">
         <div class="col-4 col-xs-12 centered">
 
@@ -18,17 +18,17 @@
                     </li>
                 </ul>
            
-
+                @if ($facebookauth == 1)
                     <form class="form-horizontal facebook-login" role="form" method="get" action="{{ url('/login/facebook') }}">
                         <div class="col-8 col-xs-12 centered">
-                            <button type="submit" class="btn btn-facebook"><i class="fa fa-facebook-f"></i>
+                            <button type="submit" class="btn btn-facebook"><i class="fab fa-facebook-square"></i>
                               Registreer met Facebook
                             </button>
                         </div>
                     </form>
 
                     <div class="divider text-center" data-content="Of maak een Mijn Belboei account"></div>
-
+                @endif    
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}

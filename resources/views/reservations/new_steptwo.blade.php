@@ -58,9 +58,24 @@
                             <div class="form-group col-12 centered">
                                 <label class="form-checkbox">
                                     <input type="checkbox" id="two_weeks">
-                                    <i class="form-icon" checked type="checkbox" ></i> Ik wil twee weken achter elkaar.
+                                    <i class="form-icon"></i> Ik wil twee weken achter elkaar.
                                 </label>
                             </div>
+                            {{-- <div class="popover popover-right">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                <div class="popover-container">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="card-title h5">
+                                                Twee weken aan een.
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            Indien u deze optie aan vinkt zullen we een week aan uw eerste week vast zetten.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
                             <hr>
                             @if (($ronde2) == 0)
                             <div class="form-group" id="second-week">

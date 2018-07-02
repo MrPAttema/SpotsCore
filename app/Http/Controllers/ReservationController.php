@@ -264,8 +264,8 @@ class ReservationController extends Controller
                 'adress' => encrypt($request['adress']),
                 'postcode' => encrypt($request['postcode']),
                 'city' => encrypt($request['city']),
-                'work_location' => encrypt($request['work_location']),
-                'work_department' => encrypt($request['work_department']),
+                // 'work_location' => encrypt($request['work_location']),
+                // 'work_department' => encrypt($request['work_department']),
             ]);
 
             DB::table("occupied_weeks_$res_year")->where('location_id', $res_location_id)->where('week', $res_toegewezen_week)->update(['bezet' => $bezet]);

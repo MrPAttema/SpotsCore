@@ -1059,6 +1059,34 @@ $(document).ready(function () {
     });
 });
 
+$('input[type=two_weeks]').attr('checked', function () {
+
+    console.log("checked");
+    $("#res_week1").html('Selecteer uw vertrek week:');
+});
+
+$('#form-checkbox').change(function () {
+    if ($(this).prop("checked")) {
+        console.log("checked");
+        $("#res_week1").html('Selecteer uw vertrek week:');
+    } else {
+        console.log("unchecked");
+        $("#res_week1").html('Selecteer uw eerste voorkeursweek:');
+    }
+});
+
+// $(document).ready(function () {
+//     if (document.getElementById('two_weeks').checked) {
+//         console.log("checked");
+//         $("#res_week1").html('Selecteer uw vertrek week:');
+//         $("#second-week").hide(150);
+//     } else {
+//         console.log("unchecked")
+//         $("#res_week1").html('Selecteer uw eerste voorkeursweek:');
+//         $("#second-week").show(150);
+//     }
+// });
+
 /***/ }),
 /* 10 */,
 /* 11 */,

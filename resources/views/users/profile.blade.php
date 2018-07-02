@@ -7,24 +7,54 @@
 
             <div class="margin-15">
                 <h3>
-                    Gebruiker gegevens
+                    Uw profiel
                 </h3>
             </div>
 
             <div class="panel">
                 <div class="margin-15">
-                    @foreach ($users as $user)
+                    <span>Uw huidige prioriteit: <b>{{$priority}}</b></span>
+                    <div class="popover popover-bottom">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <div class="popover-container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title h5">
+                                        Uw prioriteit.
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                   Dit cijfer kan varieren van 1 tot 5. Waar 1 de laagste prioriteit is en 5 de hoogste. Bij het toewijzen van de reserveringen houden wij hier rekening mee. 
+                                   Hoe hoger uw prioriteit, deste hoger de kans dat uw reservering wordt toegewezen.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="margin-15">
                     @php
                         $user = (object) $user;
                         $firstname = decrypt($user->firstname);
                         $lastname = decrypt($user->lastname);
                         $email = decrypt($user->email);
-                        $phone = decrypt($user->phone);
-                        $adress = decrypt($user->adress);
-                        $postcode = decrypt($user->postcode);
-                        $city = decrypt($user->city);
-                        $work_location = decrypt($user->work_location);
-                        $work_department = decrypt($user->work_department);
+                        if ($user->adress == null) {
+                            $adress = '';
+                            $phone = '';
+                            $postcode = '';
+                            $city = '';         
+                            $work_location = '';
+                            $work_department = '';
+                        } else {
+                            $adress = decrypt($user->adress);
+                            $phone = decrypt($user->phone);
+                            $postcode = decrypt($user->postcode);
+                            $city = decrypt($user->city);         
+                            $work_location = decrypt($user->work_location);
+                            $work_department = decrypt($user->work_department);
+                        }
                     @endphp
                     <form class="user-panel" method="post">
                         <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
@@ -130,7 +160,6 @@
                         </div>
                       </form>
                       </div>
-                      @endforeach
                 </div>
             </div>
         </div>
