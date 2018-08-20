@@ -18,21 +18,12 @@ window.Vue = require('vue');
 
 // Vue.component('example', require('./components/Example.vue'));
 
-// Vue.component('reservationsteptwo', require('./components/ReservationStepTwo.vue'));
+Vue.component('reservationsteptwo', require('./components/ReservationStepTwo.vue'));
 
-// const app = new Vue({
-//     el: '#vue'
-// });
-
-$(function () {
-    $(".slides").slidesjs({
-        pagination: {
-            active: false,
-        },
-        width: 940,
-        height: 528
-    });
+const app = new Vue({
+    el: '#vue'
 });
+
 
 $(document).ready(function () {
     $('.submit-btn').click(function () {

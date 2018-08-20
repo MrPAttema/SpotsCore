@@ -23,7 +23,7 @@ class LocationsController extends Controller
         return view('user.index', ['users' => $users]);
     }
 
-    public function updateSettings() {
+    public function updateSettings(Request $request) {
 
         
 

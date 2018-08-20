@@ -68,7 +68,13 @@ class UserController extends Controller
             'postcode' => 'required',
             'city' => 'required',
             'work_location' => 'required',
-        ])->validate();
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('users/profile')
+                ->withErrors($validator)
+                ->withInput();
+        }
             
         $currentUserID = Auth::id();
 
@@ -85,6 +91,6 @@ class UserController extends Controller
         ]);
             
         $request->session()->flash('message', 'Wijzigingen opgeslagen.');
-        return Redirect('users/profile');
+        return redirect('users/profile');
     }
 }

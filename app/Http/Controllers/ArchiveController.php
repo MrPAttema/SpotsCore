@@ -11,6 +11,7 @@ use App\LocationArchive;
 use App\UserArchive;
 use App\User;
 use DB;
+use Crypt;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -125,7 +126,7 @@ class ArchiveController extends Controller
         // Get Current User Data
         $current_user_id = Auth::id();
         $current_user = User::find($current_user_id);
-        $current_user_email = $current_user->email;
+        $current_user_email = Crypt::decrypt($current_user->email);
         // Get Old User Data
         $old_user_id = DB::table('user_archives')->where('email', $current_user_email)->value('id');
         $res_year = $request->res_year;
@@ -139,6 +140,11 @@ class ArchiveController extends Controller
                 ->where('reservation_archives.res_year', '=', $res_year)
                 ->select('touristtax_archives.*', 'payment_archives.*', 'locations.*', 'user_archives.*', 'reservation_archives.*')
                 ->distinct('user_archives.email')->get();
+
+        if ($records == null) {
+            $request->session()->flash('error', 'Er is niets gevonden in het archief.');
+            return redirect('archive');
+        }
 
 		return view('archive.index', compact('records', 'res_year', 'res_id'));
 	}

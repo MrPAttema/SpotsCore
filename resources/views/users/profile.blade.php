@@ -24,8 +24,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                   Dit cijfer kan varieren van 1 tot 5. Waar 1 de laagste prioriteit is en 5 de hoogste. Bij het toewijzen van de reserveringen houden wij hier rekening mee. 
-                                   Hoe hoger uw prioriteit, deste hoger de kans dat uw reservering wordt toegewezen.
+                                    Dit cijfer kan varieren van 1 tot 5. Waar 1 de laagste prioriteit is en 5 de hoogste. Bij het toewijzen van de reserveringen houden wij hier rekening mee. 
+                                    Hoe hoger uw prioriteit, deste hoger de kans dat uw reservering wordt toegewezen.
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">E-mailadres:</label>
-                            <input class="form-input" type="text" name="email" value="{{$email}}" autofocus>
+                            <input class="form-input" type="email" name="email" value="{{$email}}" autofocus>
                             @if ($errors->has('email')) 
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -85,7 +85,7 @@
                             @endif
                         </div>
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="email">Telefoon:</label>
+                            <label for="email">Telefoon: (10 Cijfers)</label>
                             <input class="form-input" type="text" name="phone" value="{{$phone}}">
                             @if ($errors->has('phone')) 
                                 <span class="help-block">
@@ -108,15 +108,6 @@
                             @if ($errors->has('postcode')) 
                                 <span class="help-block">
                                     <strong>{{ $errors->first('postcode') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="email">Telefoon:</label>
-                            <input class="form-input" type="text" name="phone" value="{{$phone}}">
-                            @if ($errors->has('phone')) 
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                             @endif
                         </div>

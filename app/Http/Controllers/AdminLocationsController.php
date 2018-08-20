@@ -31,7 +31,17 @@ class AdminLocationsController extends Controller
 
     public function update(Request $request)
     {
-        # code...
+        App\Location::where('id', $request->location_id)->update([
+            'location_price_low' => $request->location_price_low,
+            'location_date_low' => $request->location_date_low,
+            'location_price_high' => $request->location_price_high,
+            'location_date_high' => $request->location_date_high,
+            'location_price' => $request->location_price,
+            'location_tax' => $request->location_tax,
+        ]);
+
+        $request->session()->flash('message', 'Wijzigingen opgeslagen.');
+        return Redirect('admin/locations');
     }
 
 }

@@ -93,8 +93,17 @@ class ReservationController extends Controller
             $datesHigh = explode(",", $location->location_date_high);
             $occupiedWeeks = DB::table('occupied_weeks_' . $res_year)->where('location_id', $location_id)->where('bezet', 0)->get()->toArray();
             $weeks = array();
+
+            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price');
+            $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
             
             foreach ($occupiedWeeks as $week) {
+                if (in_array($week->week, $datesHigh) == false) {
+                    $week->price = $amount_low;
+                } else {
+                    $week->price = $amount_high;
+                }
+                $week->tax = $location->location_tax;
                 $carbon->setISODate($res_year, $week->week);
                 $enterDate = $carbon->startOfWeek()->format('d-m-Y');
                 $exitDate = $carbon->addWeek()->format('d-m-Y');
@@ -103,8 +112,9 @@ class ReservationController extends Controller
                 array_push($weeks, $week);
             }
 
-            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price');
-            $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
+
+
+            // dd($weeks);
 
             return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate', 'taxtype'));
 
@@ -123,11 +133,12 @@ class ReservationController extends Controller
         $res_year = $requestData['res_year'];
         $location_id = $requestData['location_id'];
         $res_week1 = json_decode($requestData['res_week1']);
+        dd($res_week1);
         $res_week2 = json_decode($requestData['res_week2']);
         $res_week1 = $res_week1->week;
         $res_week2 = $res_week2->week_two;
         
-        if (isset($requestData['res_week2'])) {
+        if (isset($requestData['res_week2']) && ($requestData['two_weeks_together'])) {
             
             $res_week2 = $res_week2;
 

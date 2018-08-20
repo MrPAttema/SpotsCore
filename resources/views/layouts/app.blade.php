@@ -18,6 +18,8 @@
     <link rel="dns-prefetch" href="//ajax.googleapis.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="{{ asset('/css/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/jquery-ui.theme.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
@@ -29,12 +31,12 @@
     <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/js/jquery-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/sliders.js') }}"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     
-
-    <script>
+    <script type="text/javascript" src="{{ asset('/js/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/sliders.js') }}"></script>
+        <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
@@ -230,6 +232,7 @@
 
         <div class="footer">
             &copy; Spots by Digital Den - 2018
+            <a href="/hoehetwerkt"><span class="text-right">Hoe het werkt</span></a>
             <a href="/terms"><span class="text-right">Algemene & Privacy Voorwaarden</span></a>
             <a href="/terms/cancellation"><span class="text-right"> Annulerings Voorwaarden</span></a>
         </div>
@@ -238,6 +241,22 @@
 
 <script type="text/javascript" src="{{ asset('/js/serviceWorker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/js/push.js') }}"></script>    
+<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.slideshow-container').slick({
+            infinite: true,
+            speed: 200,
+            autoplay: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            lazyLoad: 'progressive',
+            fade: true,
+            cssEase: 'linear'
+        });
+    });
+</script>
         
 </body> 
 </html>

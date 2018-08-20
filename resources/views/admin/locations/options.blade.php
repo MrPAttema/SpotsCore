@@ -19,28 +19,41 @@
                         <div class="card-title h5">{{$location->location_name}}, {{$location->location_location}}</div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ URL::to('/media/upload') }}" method="post" enctype="multipart/form-data">
+                        {{-- <form action="{{ URL::to('/media/upload') }}" method="post" enctype="multipart/form-data">
                             <label>Select image to upload:</label>
                             <input class="btn" type="file" name="file" id="file">
                             <input class="btn" type="submit" value="Upload" name="submit">
                             <input type="hidden" value="{{ csrf_token() }}" name="_token">
-                        </form>
-                        <form method="post" action="/reservations/new">
+                        </form> --}}
+                        <form method="post" action="/admin/locations">
 
-                            <label for="email">Laagseizoen prijs: &#8364;</label>
-                            <input class="form-input" type="text" name="adress" value="{{$location->location_price}}">
+                            <label for="email">Kortingsprijs: &#8364;</label>
+                            <input class="form-input" type="text" name="location_price_low" value="{{$location->location_price_low}}">
 
+                            <label for="email">Kortingsweken:</label>
+                            <input class="form-input" type="text" name="location_date_low" value="{{$location->location_date_low}}">
+                            
+                            <hr>
+                            
                             <label for="email">Hoogseizoen prijs: &#8364;</label>
-                            <input class="form-input" type="text" name="adress" value="{{$location->location_price_high}}">
+                            <input class="form-input" type="text" name="location_price_high" value="{{$location->location_price_high}}">
+                            
+                            <label for="email">Hoogseizoen weken:</label>
+                            <input class="form-input" type="text" name="location_date_high" value="{{$location->location_date_high}}">
+                            
+                            <hr>
+                            
+                            <label for="email">Prijs normaal: &#8364;</label>
+                            <input class="form-input" type="text" name="location_price" value="{{$location->location_price}}">
 
                             <label for="email">Toeristenbelasting: &#8364;</label>
-                            <input class="form-input" type="text" name="adress" value="{{$location->location_tax}}">
+                            <input class="form-input" type="text" name="location_tax" value="{{$location->location_tax}}">
+
 
                         </div>
                         <div class="card-footer">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input name="location_id" type="hidden" value="{{$location->id}}"></input>
-                            {{ method_field('PATCH') }}
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <button type="submit" class="btn btn-primary submit-btn" id="reservation-toewijs-button">Opslaan</button>
                         </div>

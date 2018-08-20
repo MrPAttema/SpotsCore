@@ -1,8 +1,9 @@
 {
   "/js/app.js": "/js/app.js",
+  "/js/push.js": "/js/push.js",
   "/css/app.css": "/css/app.css",
   "/css/spectre.css": "/css/spectre.css",
+  "/js/slick.js": "/js/slick.js",
   "/js/serviceWorker.js": "/js/serviceWorker.js",
-  "/js/push.js": "/js/push.js",
   "/js/sliders.js": "/js/sliders.js"
 }

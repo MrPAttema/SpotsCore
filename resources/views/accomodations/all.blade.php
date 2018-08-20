@@ -18,13 +18,18 @@
             <div class="column col-4 col-xs-12">
                 <div class="card margin-15">
                     <div class="card-image">
+                        <div class="slideshow-container">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg" style="width:100%">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}2.jpg" style="width:100%">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}3.jpg" style="width:100%">
+                        </div>
 
-                        <div class="slides">
+                        {{-- <div class="slides">
                             <img src="/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg">
                             <img src="/img/locations/{{$Location->location_name}}/{{$Location->location_name}}2.jpg">
                             <img src="/img/locations/{{$Location->location_name}}/{{$Location->location_name}}3.jpg">
                             <img src="/img/locations/{{$Location->location_name}}/{{$Location->location_name}}4.jpg">
-                        </div>
+                        </div> --}}
                             {{--  <div class="mySlides{{$key}} fade">
                             <div class="slideshow-container">
                                     <div class="numbertext">1 / 3</div>
@@ -72,7 +77,7 @@
                         Vanaf: <b>&euro; {{$Location->location_price}},-</b> per week
                         @if ($touristTax == 0)
                             <div class="location-toerist-tax">
-                                Incl toeristenbelasting: &euro;{{$Location->location_tax}} per week.
+                                Excl toeristenbelasting: &euro;{{$Location->location_tax}} per week.
                             </div>
                         @endif
                     </div>
@@ -105,139 +110,144 @@
                             <h5>Voorzieningen</h5>
                                 <hr>
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/rooms.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/rooms.svg')}}">
                                     {{$Location->location_bedrooms}} Slaapkamers
                                 </div>
                                 <hr>
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/singlebed.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/singlebed.svg')}}">
                                     {{$Location->location_beds}} Bedden
                                 </div>
                                 <hr>
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/family.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/family.svg')}}">
                                     {{$Location->location_maxpersons}} Personen
                                 </div>
                                 <hr>
                             @if (($Location->location_family) == 0)
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/family.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/family.svg')}}">
                                     Gezins/kindvriendelijk
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_fireplace) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_fireplace.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_fireplace.svg')}}">
                                     Geen openhaard
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/fireplace.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/fireplace.svg')}}">
                                     Openhaard
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_tv) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_tv.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_tv.svg')}}">
                                     Geen TV
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/tv.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/tv.svg')}}">
                                     TV
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_radio) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_radio.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_radio.svg')}}">
                                     Geen Radio
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/radio.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/radio.svg')}}">
                                     Radio
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_shower) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_shower.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_shower.svg')}}">
                                     Geen Douche
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/shower.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/shower.svg')}}">
                                     Douche
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_publictransport) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_bus.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                     Geen OV station dichtbij
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/bus.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
                                     OV station dichtbij
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_wifi) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_wifi.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_wifi.svg')}}">
                                     Geen Wi-Fi
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/wifi.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/wifi.svg')}}">
                                     Wi-Fi Aanwezig
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_smoking) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_smoking.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_smoking.svg')}}">
                                     Roken niet toegestaan
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/smoking.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/smoking.svg')}}">
                                     Roken toegestaan
                                 </div>
                                 <hr>
                             @endif
                             @if (($Location->location_pets) == 0)
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/no_pets.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/no_pets.svg')}}">
                                     Huisdieren niet toegestaan
                                 </div>
                                 <hr>
                             @else
                                 <div class="panel-body-location-details">
-                                    <img class="location-icons" src="{{URL::asset('icons/v2/pets.svg')}}">
+                                    <img class="location-icons" src="{{URL::to('/img/icons/v2/pets.svg')}}">
                                     Huisdieren toegestaan
                                 </div>
                                 <hr>
                             @endif
 
                             <h5>Indeling</h5>
-                            <img class="location-icons" src="{{URL::asset('icons/v2/bunkbed.svg')}}">
-                            <img class="location-icons" src="{{URL::asset('icons/v2/bunkbed.svg')}}">
-                            <img class="location-icons" src="{{URL::asset('icons/v2/dubblebed.svg')}}">
-                            2 stapelbedden,
-                            1 tweepersoonsbed
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}">
+                                2x stappelbedden
+                            </div>
+                            <hr>
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/dubblebed.svg')}}">
+                                1 tweepersoonsbed
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

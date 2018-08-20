@@ -7,7 +7,7 @@
 
             <div class="margin-15">
                 <h3>
-                    Algemene Annuleringsvoorwaarden
+                    Annulerings Voorwaarden
                 </h3>
             </div>
     

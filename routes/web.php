@@ -37,6 +37,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hoehetwerkt', function () {
+    return view('terms/howitworks');
+});
+
 Route::get('/terms', function () {
     return view('terms/terms&conditions');
 });
