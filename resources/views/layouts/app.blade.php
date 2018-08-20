@@ -144,14 +144,36 @@
                 </div>
             </li>
 
-            <a class="btn btn-link" href="{{ url('/help') }}"><i class="fa fa-question" aria-hidden="true"></i> Help</a>
             <div class="dropdown dropdown-right">
-            @if (Auth::guest())
-                {{--  --}}
-            @else
-                <a class="btn btn-link dropdown-toggle badge" data-badge="{{$messageCount}}" tabindex="0" href="#" class="dropdown-toggle" >{{  Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-            @endif
-                
+                @if (Auth::guest())
+                    {{--  --}}
+                @else 
+                <a class="btn btn-link dropdown-toggle" tabindex="0" href="#" class="dropdown-toggle">Algemene Informatie <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                <ul class="menu">
+                    <li class="divider" data-content="Informatie"></li>
+                    <li class="menu-item">
+                        <a href="{{ url('/hoehetwerkt') }}"><i class="fa fa-info" aria-hidden="true"></i>
+                            Hoe het werkt
+                        </a>
+                        <a href="{{ url('/over-ons') }}"><i class="fa fa-book" aria-hidden="true"></i>
+                            De vereniging
+                        </a>
+                    </li>
+                    <li class="divider" data-content="FAQ"></li>
+                    <li class="menu-item">
+                        <a href="{{ url('/help') }}"><i class="fa fa-question" aria-hidden="true"></i> 
+                            Help
+                        </a>
+                    </li>
+                </ul>
+                @endif
+            </div>
+            <div class="dropdown dropdown-right">
+                @if (Auth::guest())
+                    {{--  --}}
+                @else
+                    <a class="btn btn-link dropdown-toggle badge" data-badge="{{$messageCount}}" tabindex="0" href="#" class="dropdown-toggle" >{{  Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                @endif     
                 <ul class="menu">
                     <li class="divider" data-content="Profiel"></li>
                     <li class="menu-item">
@@ -232,7 +254,6 @@
 
         <div class="footer">
             &copy; Spots by Digital Den - 2018
-            <a href="/hoehetwerkt"><span class="text-right">Hoe het werkt</span></a>
             <a href="/terms"><span class="text-right">Algemene & Privacy Voorwaarden</span></a>
             <a href="/terms/cancellation"><span class="text-right"> Annulerings Voorwaarden</span></a>
         </div>
