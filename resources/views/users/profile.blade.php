@@ -84,6 +84,15 @@
                                 </span>
                             @endif
                         </div>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email">E-mailadres (Herhalen):</label>
+                            <input class="form-input" type="email" name="email_herhalen" value="{{$email}}" autofocus>
+                            @if ($errors->has('email')) 
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                             <label for="email">Telefoon: (10 Cijfers)</label>
                             <input class="form-input" type="text" name="phone" value="{{$phone}}">
