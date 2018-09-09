@@ -19,7 +19,7 @@
     z-index: $zindex-4;
 
     .modal-overlay {
-      background: rgba($bg-color, .20);
+      background: rgba($bg-color, .70);
       bottom: 0;
       cursor: default;
       display: block;
@@ -31,8 +31,8 @@
 
     .modal-container {
       animation: slide-down .2s ease 1;
-      max-width: 640px;
-      width: 100%;
+      max-width: 840px;
+      min-width: 70%;
       z-index: $zindex-0;
     }
   }
@@ -73,6 +73,19 @@
     overflow-y: auto;
     padding: $unit-4;
     position: relative;
+    
+    .content {
+        float: left;
+        width: 49%;
+        
+    }
+
+    .content-right {
+        float: right;
+        top: 0;
+        width: 49%;
+        position: sticky;
+    }
   }
 
   .modal-footer {

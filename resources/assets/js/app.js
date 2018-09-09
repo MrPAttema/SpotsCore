@@ -47,7 +47,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('.modal-open').click(function () {
-        $('.modal').addClass('active');
+        var id = $(this).attr('id')
+        $('#modal-' + id).addClass('active');
+        $('#modal-' + id).next().addClass('active');
     });
 });
 
@@ -57,56 +59,56 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $('select[name=res_week1]').change(function () {
-        var obj = $('select[name=res_week1]').val();
-        var result = jQuery.parseJSON(obj);
-        $.each(result, function (key, value) {
-            $("#weekOne").html(result.week);
-            $("#priceOne").html(result.prijs);
-            $("#in").html(result.in);
-            $("#uit").html(result.uit);
-        });
-    });
-});
+// $(document).ready(function () {
+//     $('select[name=res_week1]').change(function () {
+//         var obj = $('select[name=res_week1]').val();
+//         var result = jQuery.parseJSON(obj);
+//         $.each(result, function (key, value) {
+//             $("#weekOne").html(result.week);
+//             $("#priceOne").html(result.prijs);
+//             $("#in").html(result.in);
+//             $("#uit").html(result.uit);
+//         });
+//     });
+// });
 
 
-$(document).ready(function () {
-    $('select[name=res_week2]').change(function () {
-        var obj = $('select[name=res_week2]').val();
-        var result = jQuery.parseJSON(obj);
-        $.each(result, function (key, value) {
-            $("#weekTwo").html(result.week_two);
-            $("#priceTwo").html(result.prijs_two);
-            $("#inTwo").html(result.in_two);
-            $("#uitTwo").html(result.uit_two);
-        });
-    });
-});
+// $(document).ready(function () {
+//     $('select[name=res_week2]').change(function () {
+//         var obj = $('select[name=res_week2]').val();
+//         var result = jQuery.parseJSON(obj);
+//         $.each(result, function (key, value) {
+//             $("#weekTwo").html(result.week_two);
+//             $("#priceTwo").html(result.prijs_two);
+//             $("#inTwo").html(result.in_two);
+//             $("#uitTwo").html(result.uit_two);
+//         });
+//     });
+// });
 
 
-$(document).ready(function () {
-    $("#two_weeks").change(function() {
-        $("#res_week1").html('Selecteer uw vertrek week:');
-        $("#second-week").toggle(150);
-    });
-});
+// $(document).ready(function () {
+//     $("#two_weeks").change(function() {
+//         $("#res_week1").html('Selecteer uw vertrek week:');
+//         $("#second-week").toggle(150);
+//     });
+// });
 
-$('input[type=two_weeks]').attr('checked', function () {
+// $('input[type=two_weeks]').attr('checked', function () {
 
-    console.log("checked");
-    $("#res_week1").html('Selecteer uw vertrek week:');
-})
+//     console.log("checked");
+//     $("#res_week1").html('Selecteer uw vertrek week:');
+// })
 
-$('#form-checkbox').change(function () {
-    if ($(this).prop("checked")) {
-        console.log("checked");
-        $("#res_week1").html('Selecteer uw vertrek week:');
-    } else {
-        console.log("unchecked");
-        $("#res_week1").html('Selecteer uw eerste voorkeursweek:')
-    }
-});
+// $('#form-checkbox').change(function () {
+//     if ($(this).prop("checked")) {
+//         console.log("checked");
+//         $("#res_week1").html('Selecteer uw vertrek week:');
+//     } else {
+//         console.log("unchecked");
+//         $("#res_week1").html('Selecteer uw eerste voorkeursweek:')
+//     }
+// });
 
 // $(document).ready(function () {
 //     if (document.getElementById('two_weeks').checked) {

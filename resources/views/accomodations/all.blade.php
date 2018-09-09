@@ -59,14 +59,14 @@
                         @else
                         <button type="button" class="btn button-warning"><i class="fa fa-ban" aria-hidden="true"></i> Reserveren niet mogelijk</button>
                         @endif
-                        <button type="button" class="btn modal-open"><i class="fa fa-info" aria-hidden="true"></i> Details</button>
+                        <button type="button" class="btn modal-open" id="{{$Location->id}}"><i class="fa fa-info" aria-hidden="true"></i> Details</button>
                     </form>
                 </div>
             </div>
         </div>
 
         <div class="modal" id="modal-{{$Location->id}}">
-            <div class="modal-overlay"></div>
+            <div class="modal-overlay" id="modal-{{$Location->id}}"></div>
             <div class="modal-container">
                 <div class="modal-header">
                     <button class="btn btn-clear modal-clear float-right"></button>
@@ -153,6 +153,84 @@
                             </div>
                             <hr>
                         @endif
+                        @if (($Location->central_heating) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen centrale verwarming
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Centrale verwarming
+                            </div>
+                            <hr>
+                        @endif
+                        @if (($Location->fridge) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen koelkast
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Koelkast
+                            </div>
+                            <hr>
+                        @endif
+                        @if (($Location->coffee) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen koffie apparaat
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Koffie apparaat
+                            </div>
+                            <hr>
+                        @endif
+                        @if (($Location->washingmachine) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen wasmachine
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Wasmachine
+                            </div>
+                            <hr>
+                        @endif
+                        @if (($Location->dryer) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen droger
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Droger
+                            </div>
+                            <hr>
+                        @endif
+                        @if (($Location->dishwasher) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                Geen vaatwasser
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                Vaatwasser
+                            </div>
+                            <hr>
+                        @endif
                         @if (($Location->location_publictransport) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
@@ -208,15 +286,18 @@
 
                         <h5>Indeling</h5>
                         <div class="panel-body-location-details">
-                            <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}">
-                            <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}">
+                            {{-- <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}"> --}}
+                            {{-- <img class="location-icons" src="{{URL::to('/img/icons/v2/bunkbed.svg')}}"> --}}
                             2x stappelbedden
                         </div>
                         <hr>
                         <div class="panel-body-location-details">
-                            <img class="location-icons" src="{{URL::to('/img/icons/v2/dubblebed.svg')}}">
+                            {{-- <img class="location-icons" src="{{URL::to('/img/icons/v2/dubblebed.svg')}}"> --}}
                             1 tweepersoonsbed
                         </div>
+                    </div>
+                    <div class="content-right">
+                        <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg" style="width:100%">
                     </div>
                 </div>
                 <div class="modal-footer">
