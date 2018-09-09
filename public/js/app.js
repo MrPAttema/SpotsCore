@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 46);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -597,7 +597,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(32);
+var normalizeHeaderName = __webpack_require__(30);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -11069,12 +11069,12 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(24);
-var buildURL = __webpack_require__(27);
-var parseHeaders = __webpack_require__(33);
-var isURLSameOrigin = __webpack_require__(31);
+var settle = __webpack_require__(22);
+var buildURL = __webpack_require__(25);
+var parseHeaders = __webpack_require__(31);
+var isURLSameOrigin = __webpack_require__(29);
 var createError = __webpack_require__(8);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(26);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(24);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -11170,7 +11170,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(29);
+      var cookies = __webpack_require__(27);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -11291,7 +11291,7 @@ module.exports = function isCancel(value) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(23);
+var enhanceError = __webpack_require__(21);
 
 /**
  * Create an Error with the specified message, config, error code, and response.
@@ -11337,9 +11337,9 @@ module.exports = function bind(fn, thisArg) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(36);
+__webpack_require__(34);
 
-window.Vue = __webpack_require__(44);
+window.Vue = __webpack_require__(42);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -11349,7 +11349,7 @@ window.Vue = __webpack_require__(44);
 
 // Vue.component('example', require('./components/Example.vue'));
 
-Vue.component('reservationsteptwo', __webpack_require__(41));
+Vue.component('reservationsteptwo', __webpack_require__(39));
 
 var app = new Vue({
     el: '#vue'
@@ -11451,17 +11451,25 @@ $('#form-checkbox').change(function () {
 /***/ }),
 /* 11 */,
 /* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 13 */
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(18);
+// removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 18 */
+/* 14 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(16);
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11469,7 +11477,7 @@ module.exports = __webpack_require__(18);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(9);
-var Axios = __webpack_require__(20);
+var Axios = __webpack_require__(18);
 var defaults = __webpack_require__(3);
 
 /**
@@ -11504,14 +11512,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(6);
-axios.CancelToken = __webpack_require__(19);
+axios.CancelToken = __webpack_require__(17);
 axios.isCancel = __webpack_require__(7);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(34);
+axios.spread = __webpack_require__(32);
 
 module.exports = axios;
 
@@ -11520,7 +11528,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11584,7 +11592,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11592,10 +11600,10 @@ module.exports = CancelToken;
 
 var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(21);
-var dispatchRequest = __webpack_require__(22);
-var isAbsoluteURL = __webpack_require__(30);
-var combineURLs = __webpack_require__(28);
+var InterceptorManager = __webpack_require__(19);
+var dispatchRequest = __webpack_require__(20);
+var isAbsoluteURL = __webpack_require__(28);
+var combineURLs = __webpack_require__(26);
 
 /**
  * Create a new instance of Axios
@@ -11676,7 +11684,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11735,14 +11743,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(25);
+var transformData = __webpack_require__(23);
 var isCancel = __webpack_require__(7);
 var defaults = __webpack_require__(3);
 
@@ -11821,7 +11829,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11847,7 +11855,7 @@ module.exports = function enhanceError(error, config, code, response) {
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11879,7 +11887,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11906,7 +11914,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11949,7 +11957,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12024,7 +12032,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12043,7 +12051,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12103,7 +12111,7 @@ module.exports = (
 
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12124,7 +12132,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12199,7 +12207,7 @@ module.exports = (
 
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12218,7 +12226,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12262,7 +12270,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12296,7 +12304,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12380,23 +12388,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+var url = "/reservations/new/getprice";
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         id: Number,
-        tax: Number,
-        taxtype: Number,
+        res_year: Number,
         ronde1: Number,
         ronde2: Number,
-        weeks: Array,
-        week: {
-            id: Number,
-            location_id: Number,
-            price: Number,
-            week: Number,
-            bezet: Number,
-            enterDate: String,
-            exitDate: String
-        }
+        weeks: Array
     },
     data: function data() {
         return {
@@ -12406,30 +12407,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             weekOnePrice: [],
             weekTwoPrice: [],
             checked: false,
-            isReadOnly: false
+            isReadOnly: false,
+            weekData: [],
+            weekDataTwo: []
         };
     },
     methods: {
+        getPriceData: function getPriceData() {
+            var self = this;
+            axios.post(url, {
+                week: self.weekOne,
+                location_id: self.id,
+                res_year: self.res_year
+            }).then(function (response) {
+                self.weekData = response.data;
+                if (self.checked === true) {
+                    self.twoWeeks();
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getPriceDataTwo: function getPriceDataTwo() {
+            var self = this;
+            axios.post(url, {
+                week: self.weekTwo,
+                location_id: self.id,
+                res_year: self.res_year
+            }).then(function (response) {
+                self.weekDataTwo = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
         check: function check(e) {
             if (e.target.checked) {
                 this.checked = true;
-                this.isReadOnly = true;
+                this.weekTwo.isReadOnly = true;
                 this.twoWeeks();
             } else if (!e.target.checked) {
                 this.checked = false;
-                this.isReadOnly = false;
+                this.weekTwo.isReadOnly = false;
             }
         },
         twoWeeks: function twoWeeks() {
-            this.weekTwoPrice.week = this.weekOnePrice.week + 1;
+            var self = this;
+            self.weekTwo = this.weekData.week + 1;
+            axios.post(url, {
+                week: self.weekTwo,
+                location_id: self.id,
+                res_year: self.res_year
+            }).then(function (response) {
+                self.weekDataTwo = response.data;
+                console.log(self.weekDataTwo);
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     },
     computed: {
         subTotal: function subTotal() {
-            return (Number(this.weekOnePrice.price) + Number(this.weekTwoPrice.price)).toFixed(2);
+            return (Number(this.weekData.price) + Number(this.weekDataTwo.price)).toFixed(2);
         },
         taxTotal: function taxTotal() {
-            return (Number(this.weekOnePrice.tax) + Number(this.weekTwoPrice.tax)).toFixed(2);
+            return (Number(this.weekData.tax) + Number(this.weekDataTwo.tax)).toFixed(2);
         },
         totalPrice: function totalPrice() {
             return (Number(this.subTotal) + Number(this.taxTotal)).toFixed(2);
@@ -12438,11 +12479,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(38);
+window._ = __webpack_require__(36);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12453,7 +12494,7 @@ window._ = __webpack_require__(38);
 try {
   window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(37);
+  __webpack_require__(35);
 } catch (e) {}
 
 /**
@@ -12462,7 +12503,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(17);
+window.axios = __webpack_require__(15);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -12498,7 +12539,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /*!
@@ -14881,7 +14922,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31991,10 +32032,10 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(45)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(43)(module)))
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -32187,7 +32228,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(1)))
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -32243,7 +32284,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(39);
+__webpack_require__(37);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -32257,20 +32298,20 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(42)(
+var Component = __webpack_require__(40)(
   /* script */
-  __webpack_require__(35),
+  __webpack_require__(33),
   /* template */
-  __webpack_require__(43),
+  __webpack_require__(41),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\laragon\\www\\spotscore\\resources\\assets\\js\\components\\ReservationStepTwo.vue"
+Component.options.__file = "C:\\laragon\\www\\SpotsCore\\resources\\assets\\js\\components\\ReservationStepTwo.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ReservationStepTwo.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -32281,9 +32322,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f709ff28", Component.options)
+    hotAPI.createRecord("data-v-74e7946c", Component.options)
   } else {
-    hotAPI.reload("data-v-f709ff28", Component.options)
+    hotAPI.reload("data-v-74e7946c", Component.options)
   }
 })()}
 
@@ -32291,7 +32332,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -32348,7 +32389,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 43 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -32368,87 +32409,72 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.weekOnePrice),
-      expression: "weekOnePrice"
+      value: (_vm.weekOne),
+      expression: "weekOne"
     }],
     attrs: {
-      "name": "res_week1"
+      "name": "weekOne"
     },
     on: {
-      "change": function($event) {
+      "change": [function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
         }).map(function(o) {
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.weekOnePrice = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+        _vm.weekOne = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }, function($event) {
+        _vm.getPriceData()
+      }]
     }
   }, _vm._l((_vm.weeks), function(week) {
     return _c('option', {
       key: week.id,
       domProps: {
-        "value": {
-          week: week.week,
-          price: week.price,
-          in: week.enterDate,
-          uit: week.exitDate,
-          tax: week.tax
-        }
+        "value": week.week
       }
-    }, [_vm._v(_vm._s(week.week))])
+    }, [_vm._v(_vm._s(week.week) + " " + _vm._s(week.type))])
   }))]), _vm._v(" "), (_vm.checked === false) ? _c('div', [(_vm.ronde1 === 1) ? _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
-      "for": "resWeekOne"
+      "for": "resWeekTwo"
     }
   }, [_vm._v("Selecteer uw tweede week:")]), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.weekTwoPrice),
-      expression: "weekTwoPrice"
+      value: (_vm.weekTwo),
+      expression: "weekTwo"
     }],
     attrs: {
-      "name": "res_week2",
-      "disabled": _vm.isReadOnly
+      "name": "weekTwo"
     },
     on: {
-      "change": function($event) {
+      "change": [function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
         }).map(function(o) {
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.weekTwoPrice = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+        _vm.weekTwo = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }, function($event) {
+        _vm.getPriceDataTwo()
+      }]
     }
   }, [_c('option', {
     domProps: {
-      "value": {
-        week: 'Geen voorkeur',
-        price: 0,
-        in: 'Geen voorkeur',
-        uit: 'Geen voorkeur',
-        tax: 0
-      }
+      "value": 0
     }
   }, [_vm._v("Geen voorkeur")]), _vm._v(" "), _vm._l((_vm.weeks), function(week) {
     return _c('option', {
       key: week.id,
       domProps: {
-        "value": {
-          week: week.week,
-          price: week.price,
-          in: week.enterDate,
-          uit: week.exitDate,
-          tax: week.tax
-        }
+        "value": week.week
       }
-    }, [_vm._v(_vm._s(week.week))])
+    }, [_vm._v(_vm._s(week.week) + " " + _vm._s(week.type))])
   })], 2)]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "form-group col-12"
   }, [_c('label', {
@@ -32456,7 +32482,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('input', {
     attrs: {
       "type": "checkbox",
-      "id": "two_weeks_together"
+      "name": "two_weeks_together"
     },
     on: {
       "click": function($event) {
@@ -32467,25 +32493,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-icon"
   }), _vm._v(" Reserveer twee weken achter elkaar.\n                        "), _vm._m(0)])])])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "card-body"
-  }, [_vm._v("\n            Gegevens voor week: "), _c('b', [_vm._v(_vm._s(_vm.weekOnePrice.week))]), _vm._v(" "), _c('br'), _vm._v(" \n            Incheckdatum: "), _c('b', [_c('span', {
+  }, [_vm._v("\n            Gegevens voor week: "), _c('b', [_vm._v(_vm._s(_vm.weekData.week))]), _vm._v(" "), _c('br'), _vm._v(" \n            Incheckdatum: "), _c('b', [_c('span', {
     attrs: {
       "id": "in"
     }
-  }, [_vm._v(_vm._s(_vm.weekOnePrice.in))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Uitcheckdatum: "), _c('b', [_c('span', {
+  }, [_vm._v(_vm._s(_vm.weekData.enterDate))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Uitcheckdatum: "), _c('b', [_c('span', {
     attrs: {
       "id": "uit"
     }
-  }, [_vm._v(_vm._s(_vm.weekOnePrice.uit))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Weekprijs: "), _c('b', [_vm._v("€ "), _c('span', [_vm._v(_vm._s(_vm.weekOnePrice.price))]), _vm._v(",-")])]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.ronde1 === 1) ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.weekData.exitDate))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Weekprijs: "), _c('b', [_vm._v("€ "), _c('span', [_vm._v(_vm._s(_vm.weekData.price))]), _vm._v(",-")])]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.ronde1 === 1) ? _c('div', {
     staticClass: "card-body"
-  }, [_vm._v("\n            Gegevens voor week: "), _c('b', [_vm._v(_vm._s(_vm.weekTwoPrice.week))]), _vm._v(" "), _c('br'), _vm._v(" \n            Incheckdatum: "), _c('b', [_c('span', {
+  }, [_vm._v("\n            Gegevens voor week: "), _c('b', [_vm._v(_vm._s(_vm.weekDataTwo.week))]), _vm._v(" "), _c('br'), _vm._v(" \n            Incheckdatum: "), _c('b', [_c('span', {
     attrs: {
       "id": "in"
     }
-  }, [_vm._v(_vm._s(_vm.weekTwoPrice.in))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Uitcheckdatum: "), _c('b', [_c('span', {
+  }, [_vm._v(_vm._s(_vm.weekDataTwo.enterDate))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Uitcheckdatum: "), _c('b', [_c('span', {
     attrs: {
       "id": "uit"
     }
-  }, [_vm._v(_vm._s(_vm.weekTwoPrice.uit))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Weekprijs: "), _c('b', [_vm._v("€ "), _c('span', [_vm._v(_vm._s(_vm.weekTwoPrice.price))]), _vm._v(",-")])]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.checked === false) ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.weekDataTwo.exitDate))])]), _vm._v(".\n            "), _c('br'), _vm._v("\n            Weekprijs: "), _c('b', [_vm._v("€ "), _c('span', [_vm._v(_vm._s(_vm.weekDataTwo.price))]), _vm._v(",-")])]) : _vm._e(), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.checked === true) ? _c('div', {
     staticClass: "card-body"
   }, [_vm._v("\n            Subtotaal: "), _c('b', [_vm._v("€ "), _c('span', {
     attrs: {
@@ -32518,18 +32544,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-title h5"
   }, [_vm._v("\n                                            Weken samenvoegen.\n                                        ")])]), _vm._v(" "), _c('div', {
     staticClass: "card-body"
-  }, [_vm._v("\n                                        Indien u deze optie aan vinkt maken wij van beide week en reservering.\n                                        Dit betekend wel dat u weken moet kiezen die elkaar opvolgen.\n                                    ")])])])])
+  }, [_vm._v("\n                                        Indien u deze optie aan vinkt maken wij van beide week één reservering.\n                                        U kiest uw eerste week, wij plakken er daarna een aan vast.\n                                    ")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-f709ff28", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-74e7946c", module.exports)
   }
 }
 
 /***/ }),
-/* 44 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43494,10 +43520,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(2), __webpack_require__(40).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(2), __webpack_require__(38).setImmediate))
 
 /***/ }),
-/* 45 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -43525,10 +43551,12 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 46 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(10);
+__webpack_require__(10);
+__webpack_require__(13);
+module.exports = __webpack_require__(14);
 
 
 /***/ })

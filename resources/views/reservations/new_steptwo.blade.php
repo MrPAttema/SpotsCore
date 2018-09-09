@@ -15,7 +15,7 @@
                     <a href="/reservations/new/" class="tooltip" data-tooltip="Selecteer een boekingsjaar.">Stap 1</a>
                 </li>
                 <li class="step-item active">
-                    <a href="#" class="tooltip" data-tooltip="Selecteer een weeknummer.">Stap 2</a>
+                    <a href="#" class="tooltip" data-tooltip="Selecteer uw week(en).">Stap 2</a>
                 </li>
                 <li class="step-item">
                     <a href="#" class="tooltip" data-tooltip="Vul uw gegevens in.">Stap 3</a>
@@ -25,7 +25,7 @@
             <form method="post" action="{{ url('/reservations/new/stepthree') }}">
                 <div class="columns col-oneline col-gapless">
                     <div class="column col-10 centered">
-                        <reservationsteptwo :id="{{$location->id}}" :tax="{{$location->location_tax}}" :taxtype="{{$taxtype}}" :ronde1="{{$ronde1}}" :ronde2="{{$ronde2}}" :weeks="{{ json_encode($weeks) }}"></reservationsteptwo>
+                        <reservationsteptwo :id="{{$location->id}}" :res_year="{{$res_year}}" :ronde1="{{$ronde1}}" :ronde2="{{$ronde2}}" :weeks="{{ json_encode($weeks) }}"></reservationsteptwo>
                     </div>
                 </div>
                 <div class="column col-10 centered">

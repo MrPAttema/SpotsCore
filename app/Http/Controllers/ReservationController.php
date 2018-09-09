@@ -63,18 +63,57 @@ class ReservationController extends Controller
             'location_id' => 'required',
         ])->validate();
 
+        // $dubbleChseck = DB::table('reservations')->where('user_id', Auth::id())->where('res_year', $res_year)->where('res_status', 1)->get(); 
+
         $ronde1 = DB::table('options')->where('id', 3)->value('value');
         $ronde2 = DB::table('options')->where('id', 4)->value('value');
         $taxtype = DB::table('options')->where('id', 16)->value('value');
 
         if ( ($ronde1 == 1) || ($ronde2 = 1) ) {
-
-            $weekNumbers = array();
             
-            $requestData = $request->all();
-            $res_year = $requestData['res_year'];
-            $location_id = $requestData['location_id'];
+            $res_year = $request['res_year'];
+            $location_id = $request['location_id'];
             $location = DB::table('locations')->where('id', $location_id)->get()->toArray();
+            $location = array_shift($location);
+            $touristTax = DB::table('options')->where('id', 14)->value('value');
+            
+            $occupiedWeeks = DB::table('occupied_weeks_' . $res_year)->where('location_id', $location_id)->where('bezet', 0)->get()->toArray();
+
+            $datesLow = explode(",", $location->location_date_low);
+            $datesHigh = explode(",", $location->location_date_high);
+            $weeks = array();
+
+            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price_low');
+            $amount_normal = DB::table('locations')->where('id', $location_id)->value('location_price');
+            $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
+            
+            foreach ($occupiedWeeks as $week) {
+                if (in_array($week->week, $datesLow) == true) {
+                    $week->type = " - (Actieweek)";
+                } else if (in_array($week->week, $datesHigh) == true) {
+                    $week->type = " - (Hoogseizoen)";
+                } else {
+                    $week->type = "";
+                }
+                array_push($weeks, $week);
+            }
+
+            return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate', 'taxtype'));
+
+        } else {
+
+            $request->session()->flash('error', 'Reserveren is niet mogelijk. Probeer het later nog een keer.');
+            return redirect('accommodations/all'); 
+
+        }     
+    }
+
+    public function getPriceData(Request $request) {
+
+            $location_id = $request['location_id'];
+            $res_year = $request['res_year'];
+            $selectedWeek = $request['week'];
+            $location = DB::table('locations')->where('id', $request['location_id'])->get()->toArray();
             $location = array_shift($location);
             $touristTax = DB::table('options')->where('id', 14)->value('value');
 
@@ -90,61 +129,50 @@ class ReservationController extends Controller
             $carbon = Carbon::now();
             
             $locationDates = $location->location_date_high;
+            $datesLow = explode(",", $location->location_date_low);
             $datesHigh = explode(",", $location->location_date_high);
-            $occupiedWeeks = DB::table('occupied_weeks_' . $res_year)->where('location_id', $location_id)->where('bezet', 0)->get()->toArray();
-            $weeks = array();
-
-            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price');
+            $priceData = new \stdClass();
+            
+            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price_low');
+            $amount_normal = DB::table('locations')->where('id', $location_id)->value('location_price');
             $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
             
-            foreach ($occupiedWeeks as $week) {
-                if (in_array($week->week, $datesHigh) == false) {
-                    $week->price = $amount_low;
-                } else {
-                    $week->price = $amount_high;
-                }
-                $week->tax = $location->location_tax;
-                $carbon->setISODate($res_year, $week->week);
-                $enterDate = $carbon->startOfWeek()->format('d-m-Y');
-                $exitDate = $carbon->addWeek()->format('d-m-Y');
-                $week->enterDate = $enterDate;
-                $week->exitDate = $exitDate;
-                array_push($weeks, $week);
+            if (in_array($selectedWeek, $datesHigh) == true) {
+                $priceData->price = $amount_high;
+            } else if (in_array($selectedWeek, $datesLow) == true) {
+                $priceData->price = $amount_low;
+            } else {
+                $priceData->price = $amount_normal;
+
             }
+            $priceData->week = $selectedWeek;
+            $priceData->tax = $location->location_tax;
+            $carbon->setISODate($res_year, $selectedWeek);
+            $enterDate = $carbon->startOfWeek()->format('d-m-Y');
+            $exitDate = $carbon->addWeek()->format('d-m-Y');
+            $priceData->enterDate = $enterDate;
+            $priceData->exitDate = $exitDate;
 
+        return json_encode($priceData);
 
-
-            // dd($weeks);
-
-            return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate', 'taxtype'));
-
-        } else {
-
-            $request->session()->flash('error', 'Reserveren is niet mogelijk. Probeer het later nog een keer.');
-            return redirect('accommodations/all'); 
-
-        }     
     }
 
     public function stepThree(Request $request) {
 
         $requestData = $request->all();
+        dd($requestData);
            
         $res_year = $requestData['res_year'];
         $location_id = $requestData['location_id'];
-        $res_week1 = json_decode($requestData['res_week1']);
-        dd($res_week1);
-        $res_week2 = json_decode($requestData['res_week2']);
-        $res_week1 = $res_week1->week;
-        $res_week2 = $res_week2->week_two;
-        
-        if (isset($requestData['res_week2']) && ($requestData['two_weeks_together'])) {
+        $res_week1 = $requestData['weekOne']; 
+
+        if (!isset($requestData['weekTwo']) && ($requestData['two_weeks_together'])) {
             
-            $res_week2 = $res_week2;
+            $res_week2 = $requestData['weekOne'] +1;
 
         } else {
 
-            $res_week2 = 0;
+            $res_week2 = $requestData['weekTwo'];
 
         }
         

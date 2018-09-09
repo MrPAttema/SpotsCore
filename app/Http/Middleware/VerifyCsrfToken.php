@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'mollie/reservation_webhook',
-        'mollie/touristtax_webhook',        
+        'mollie/touristtax_webhook',
+        'reservations/new/getdata',           
     ];
 }

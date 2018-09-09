@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/reservations/new/save', 'ReservationController@store');
     Route::post('/reservations/new/steptwo', 'ReservationController@stepTwo');
     Route::post('/reservations/new/stepthree', 'ReservationController@stepThree');
+    Route::post('/reservations/new/getprice', 'ReservationController@getPriceData');
 
     //////////////////////////////// TAX ROUTES
     Route::post('/touristtax/new', 'TouristtaxController@index');

@@ -16,7 +16,7 @@
                     <a href="#" class="tooltip" data-tooltip="Selecteer een boekingsjaar.">Stap 1</a>
                 </li>
                 <li class="step-item">
-                    <a href="#" class="tooltip" data-tooltip="Selecteer een weeknummer.">Stap 2</a>
+                    <a href="#" class="tooltip" data-tooltip="Selecteer uw week(en).">Stap 2</a>
                 </li>
                 <li class="step-item">
                     <a href="#" class="tooltip" data-tooltip="Vul uw gegevens in.">Stap 3</a>

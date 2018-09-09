@@ -19,13 +19,16 @@
 
   .card-image {
     padding-top: $layout-spacing-lg;
+    max-height: 300px;
 
     &:first-child {
       padding-top: 0;
+      max-height: inherit;
 
       img {
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
+        max-height: 300px;
       }
     }
 

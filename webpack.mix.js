@@ -1,8 +1,7 @@
 const { mix } = require('laravel-mix');
 
-mix .js('resources/assets/js/push.js', 'public/js/push.js')
-    .js('resources/assets/js/app.js', 'public/js/app.js')
-    .js('resources/assets/js/serviceWorker.js', 'public/js/serviceWorker.js')
+mix .js('resources/assets/js/app.js', 'public/js/app.js')
+    // .js('resources/assets/js/serviceWorker.js', 'public/js/serviceWorker.js')
     .js('resources/assets/js/slick.js', 'public/js/slick.js')
     .js('resources/assets/js/jquery.slides.js', 'public/js/sliders.js')
     .sass('resources/assets/sass/app.scss', 'public/css/app.css')
