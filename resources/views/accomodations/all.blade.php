@@ -114,6 +114,19 @@
                             </div>
                             <hr>
                         @endif
+                         @if (($Location->location_wifi) == 0)
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_wifi.svg')}}">
+                                Geen Wi-Fi
+                            </div>
+                            <hr>
+                        @else
+                            <div class="panel-body-location-details">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/wifi.svg')}}">
+                                Wi-Fi Aanwezig
+                            </div>
+                            <hr>
+                        @endif
                         @if (($Location->location_tv) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_tv.svg')}}">
@@ -153,7 +166,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->central_heating) == 0)
+                        @if (($Location->location_central_heating) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen centrale verwarming
@@ -166,7 +179,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->fridge) == 0)
+                        @if (($Location->location_fridge) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen koelkast
@@ -179,7 +192,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->coffee) == 0)
+                        @if (($Location->location_coffee) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen koffie apparaat
@@ -192,7 +205,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->washingmachine) == 0)
+                        @if (($Location->location_washingmachine) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen wasmachine
@@ -205,7 +218,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->dryer) == 0)
+                        @if (($Location->location_dryer) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen droger
@@ -218,7 +231,7 @@
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->dishwasher) == 0)
+                        @if (($Location->location_dishwasher) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen vaatwasser
@@ -241,19 +254,6 @@
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
                                 OV station dichtbij
-                            </div>
-                            <hr>
-                        @endif
-                        @if (($Location->location_wifi) == 0)
-                            <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_wifi.svg')}}">
-                                Geen Wi-Fi
-                            </div>
-                            <hr>
-                        @else
-                            <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/wifi.svg')}}">
-                                Wi-Fi Aanwezig
                             </div>
                             <hr>
                         @endif
@@ -297,7 +297,11 @@
                         </div>
                     </div>
                     <div class="content-right">
-                        <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg" style="width:100%">
+                        <div class="slideshow-container">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg" style="width:100%">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}2.jpg" style="width:100%">
+                            <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}3.jpg" style="width:100%">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

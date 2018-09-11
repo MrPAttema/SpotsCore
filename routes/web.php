@@ -41,6 +41,10 @@ Route::get('/hoehetwerkt', function () {
     return view('terms/howitworks');
 });
 
+Route::get('/over-ons', function () {
+    return view('terms/aboutus');
+});
+
 Route::get('/terms', function () {
     return view('terms/terms&conditions');
 });

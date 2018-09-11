@@ -56,14 +56,14 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
+            {{-- <div class="panel panel-default">
                 <div class="panel-heading-meldingen">Notificatie instellingen:</div>
                     <div class="panel-body-adminreserveringen">
                         {{ method_field('PATCH') }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button class="btn btn-primary push-subscription-button"></button>
                     </div>
-                </div>
+                </div> --}}
 
             <div class="panel panel-default">
                 <div class="panel-heading-meldingen">Privacy instellingen:</div>

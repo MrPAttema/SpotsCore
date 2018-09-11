@@ -128,7 +128,7 @@ class AdminReservationsController extends Controller
                             
                 } else {
                     
-                    dump($reservations);
+                    dd($reservations);
 
                     $reservation = $reservations;
 

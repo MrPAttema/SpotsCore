@@ -129,7 +129,7 @@
             
         </div>
 
-        {{ $reservations->links() }}
+        {{ $reservation->links() }}
 
     </div>
 </div>

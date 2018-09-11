@@ -160,7 +160,7 @@ class ReservationController extends Controller
     public function stepThree(Request $request) {
 
         $requestData = $request->all();
-        dd($requestData);
+        // dd($requestData);
            
         $res_year = $requestData['res_year'];
         $location_id = $requestData['location_id'];
@@ -182,6 +182,16 @@ class ReservationController extends Controller
     }
 
     public function store(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'res_akkoord' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('reservations/new/stepthree')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $user_id = Auth::id();
         $user = User::find($user_id);

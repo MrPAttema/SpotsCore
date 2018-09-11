@@ -41,6 +41,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="pagination">
+                    {{-- {{ $notifications->links() }}			 --}}
+                </div>
             @else
                 <div class="panel">
                     <div class="panel-heading bottom-10 top-10">

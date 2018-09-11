@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 use DB;
 use App;
@@ -21,7 +22,7 @@ class InboxController extends Controller
         $currentUserID = Auth::id();
         $currentUser = App\User::find($currentUserID);
 
-        $notification = DB::table('notifications')->where('notifiable_id', $currentUserID)->where('type', 'App\Notifications\MadeReservation')->get();
+        $notification = DB::table('notifications')->where('notifiable_id', $currentUserID)->where('type', 'App\Notifications\MadeReservation')->orderBy('updated_at', 'desc')->get();
         
         $notifications = $notification->map(function($notification){
             return [
@@ -32,7 +33,7 @@ class InboxController extends Controller
             ];
         });
 
-        return view('users.inbox', compact('users', 'notifications'));
+        return view('users.inbox', compact('users', 'notifications', 'notification'));
     }
 
     public function markAsRead(Request $request)

@@ -73,7 +73,7 @@
 
                         <div class="form-group col-12 col-xs-12 centered">
                             <label class="form-checkbox">
-                                <input required="" id="checkbox-submit" type="checkbox" name="res_akkoord" value="1">
+                                <input id="checkbox-submit" type="checkbox" name="res_akkoord" value="1">
                                 <i class="form-icon" checked type="checkbox" name="remember"></i> Ik bevestig mijn reservering en ga akkoord met de <a href="/terms">Voorwaarden</a>.
                             </label>
                         </div>
