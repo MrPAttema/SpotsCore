@@ -10,7 +10,7 @@
 </div>
 <div class="container columns centered">
 	<div class="column col-6 col-xs-12 centered">
-		@if (count($reservations) == 0)
+		@empty ($reservations)
 
 			<div class="panel">
 				<div class="panel-heading">
@@ -39,7 +39,7 @@
                     <div class="columns col-oneline">
                         <div class="column col-4 col-xs-12 panel-body">
                             <span>
-                                Reserveringsnummer: <b>#{{$Reservation->id}}</b>
+                                Reserveringsnummer: <b>#{{$Reservation->reservation_id}}</b>
                             </span>
                             <br>
                             <span>

@@ -11,7 +11,7 @@
                 </h3>
             </div>
 
-            @if (count($reservation) == 0)
+            @empty ($reservation)
                 <div class="panel">
                     <div class="panel-heading">
                         <img class="empty-state" src="{{URL::asset('img/home_empty.svg')}}"/>
@@ -36,7 +36,7 @@
                         <div class="col8-img"></div>    
                         <div class="panel-body">                  
                             <span>
-                                Reserveringsnummer: <b>#{{$reservation->id}}</b>
+                                Reserveringsnummer: <b>#{{$reservation->reservation_id}}</b>
                             </span>
                             <br>
                             <span>

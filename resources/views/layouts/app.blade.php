@@ -180,7 +180,7 @@
                         <a href="{{ url('/users/profile') }}"><i class="fa fa-user" aria-hidden="true"></i>
                             Mijn profiel
                         </a>
-                        @if ($messageCount === 0)
+                        {{-- @if ($messageCount === 0)
                             <a href="{{ url('/users/inbox') }}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
                                 Mijn Berichten
                             </a>
@@ -188,7 +188,7 @@
                             <a class="badge" href="{{ url('/users/inbox') }}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
                                 Mijn Berichten
                             </a>
-                        @endif
+                        @endif --}}
                         <a href="{{ url('/users/privacy') }}"><i class="fa fa-lock" aria-hidden="true"></i>
                             Veiligheid
                         </a>
@@ -255,7 +255,7 @@
         <div class="footer">
             &copy; Spots by Digital Den - 2018
             <a href="/terms"><span class="text-right">Algemene & Privacy Voorwaarden</span></a>
-            <a href="/terms/cancellation"><span class="text-right"> Annulerings Voorwaarden</span></a>
+            <a href="/terms/cancellation"><span class="text-right"> Huurvoorwaarden</span></a>
         </div>
     </div>
 </div>

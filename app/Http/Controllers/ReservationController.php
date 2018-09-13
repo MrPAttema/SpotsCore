@@ -36,11 +36,11 @@ class ReservationController extends Controller
 
         if ( ($ronde1 == 1) || ($ronde2 == 1) ) {
 
-            $location_id = $request->input('location_id');
+            $location_id = $request->get('location_id');
             $location = DB::table('locations')->where('id', $location_id)->get();
             $res_year = DB::table('options')->where('id', 1)->value('value');
-            if ($res_year = $currentYear) {
-                $res_yearOld = 0;
+            if ($res_year == $currentYear) {
+                $res_yearOld = "";
             } else {
                 $res_yearOld = $res_year-1;
             }
@@ -58,6 +58,9 @@ class ReservationController extends Controller
 
     public function stepTwo(Request $request) {
 
+        $res_year = $request->get('res_year');
+        $location_id = $request->get('location_id');
+
         $validator = Validator::make($request->all(), [
             'res_year' => 'required',
             'location_id' => 'required',
@@ -71,8 +74,7 @@ class ReservationController extends Controller
 
         if ( ($ronde1 == 1) || ($ronde2 = 1) ) {
             
-            $res_year = $request['res_year'];
-            $location_id = $request['location_id'];
+
             $location = DB::table('locations')->where('id', $location_id)->get()->toArray();
             $location = array_shift($location);
             $touristTax = DB::table('options')->where('id', 14)->value('value');
@@ -110,48 +112,48 @@ class ReservationController extends Controller
 
     public function getPriceData(Request $request) {
 
-            $location_id = $request['location_id'];
-            $res_year = $request['res_year'];
-            $selectedWeek = $request['week'];
-            $location = DB::table('locations')->where('id', $request['location_id'])->get()->toArray();
-            $location = array_shift($location);
-            $touristTax = DB::table('options')->where('id', 14)->value('value');
+        $location_id = $request['location_id'];
+        $res_year = $request['res_year'];
+        $selectedWeek = $request['week'];
+        $location = DB::table('locations')->where('id', $request['location_id'])->get()->toArray();
+        $location = array_shift($location);
+        $touristTax = DB::table('options')->where('id', 14)->value('value');
 
-            $locationEnterDay = $location->change_day;
-            if ($locationEnterDay == 6) {
-                Carbon::setWeekStartsAt(Carbon::SATURDAY);
-                Carbon::setWeekEndsAt(Carbon::SATURDAY);
-            } elseif ($locationEnterDay == 5) {
-                Carbon::setWeekStartsAt(Carbon::FRIDAY);
-                Carbon::setWeekEndsAt(Carbon::FRIDAY);
-            } 
+        $locationEnterDay = $location->change_day;
+        if ($locationEnterDay == 6) {
+            Carbon::setWeekStartsAt(Carbon::SATURDAY);
+            Carbon::setWeekEndsAt(Carbon::SATURDAY);
+        } elseif ($locationEnterDay == 5) {
+            Carbon::setWeekStartsAt(Carbon::FRIDAY);
+            Carbon::setWeekEndsAt(Carbon::FRIDAY);
+        } 
 
-            $carbon = Carbon::now();
-            
-            $locationDates = $location->location_date_high;
-            $datesLow = explode(",", $location->location_date_low);
-            $datesHigh = explode(",", $location->location_date_high);
-            $priceData = new \stdClass();
-            
-            $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price_low');
-            $amount_normal = DB::table('locations')->where('id', $location_id)->value('location_price');
-            $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
-            
-            if (in_array($selectedWeek, $datesHigh) == true) {
-                $priceData->price = $amount_high;
-            } else if (in_array($selectedWeek, $datesLow) == true) {
-                $priceData->price = $amount_low;
-            } else {
-                $priceData->price = $amount_normal;
+        $carbon = Carbon::now();
+        
+        $locationDates = $location->location_date_high;
+        $datesLow = explode(",", $location->location_date_low);
+        $datesHigh = explode(",", $location->location_date_high);
+        $priceData = new \stdClass();
+        
+        $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price_low');
+        $amount_normal = DB::table('locations')->where('id', $location_id)->value('location_price');
+        $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
+        
+        if (in_array($selectedWeek, $datesHigh) == true) {
+            $priceData->price = $amount_high;
+        } else if (in_array($selectedWeek, $datesLow) == true) {
+            $priceData->price = $amount_low;
+        } else {
+            $priceData->price = $amount_normal;
 
-            }
-            $priceData->week = $selectedWeek;
-            $priceData->tax = $location->location_tax;
-            $carbon->setISODate($res_year, $selectedWeek);
-            $enterDate = $carbon->startOfWeek()->format('d-m-Y');
-            $exitDate = $carbon->addWeek()->format('d-m-Y');
-            $priceData->enterDate = $enterDate;
-            $priceData->exitDate = $exitDate;
+        }
+        $priceData->week = $selectedWeek;
+        $priceData->tax = $location->location_tax;
+        $carbon->setISODate($res_year, $selectedWeek);
+        $enterDate = $carbon->startOfWeek()->format('d-m-Y');
+        $exitDate = $carbon->addWeek()->format('d-m-Y');
+        $priceData->enterDate = $enterDate;
+        $priceData->exitDate = $exitDate;
 
         return json_encode($priceData);
 
@@ -162,8 +164,8 @@ class ReservationController extends Controller
         $requestData = $request->all();
         // dd($requestData);
            
-        $res_year = $requestData['res_year'];
-        $location_id = $requestData['location_id'];
+        $res_year = $request->get('res_year');
+        $location_id = $request->get('location_id');
         $res_week1 = $requestData['weekOne']; 
 
         if (!isset($requestData['weekTwo']) && ($requestData['two_weeks_together'])) {

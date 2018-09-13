@@ -51,13 +51,12 @@
                     @endif
                 </div>
                 <div class="card-footer">
-                    <form method="post" action="/reservations/new">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input name="location_id" type="hidden" value="{{$Location->id}}"></input>
+                    <form method="get" action="/reservations/new/">
+                        <input type="hidden" name="location_id" value="{{$Location->id}}">
                         @if($ronde1 == 1 || $ronde2 == 1)
                         <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right" aria-hidden="true"></i> Reservering aanvragen</button>
                         @else
-                        <button type="button" class="btn button-warning"><i class="fa fa-ban" aria-hidden="true"></i> Reserveren niet mogelijk</button>
+                        <button type="button" class="btn button-warning"><i class="fa fa-ban" aria-hidden="true"></i> Geen reservering mogelijk</button>
                         @endif
                         <button type="button" class="btn modal-open" id="{{$Location->id}}"><i class="fa fa-info" aria-hidden="true"></i> Details</button>
                     </form>
@@ -181,70 +180,70 @@
                         @endif
                         @if (($Location->location_fridge) == 0)
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_fridge.svg')}}">
                                 Geen koelkast
                             </div>
                             <hr>
                         @else
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/fridge.svg')}}">
                                 Koelkast
                             </div>
                             <hr>
                         @endif
                         @if (($Location->location_coffee) == 0)
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
-                                Geen koffie apparaat
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_coffee.svg')}}">
+                                Geen koffiezet apparaat
                             </div>
                             <hr>
                         @else
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
-                                Koffie apparaat
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/coffee.svg')}}">
+                                Koffiezet apparaat
                             </div>
                             <hr>
                         @endif
                         @if (($Location->location_washingmachine) == 0)
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_washingmachine.svg')}}">
                                 Geen wasmachine
                             </div>
                             <hr>
                         @else
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/washingmachine.svg')}}">
                                 Wasmachine
                             </div>
                             <hr>
                         @endif
                         @if (($Location->location_dryer) == 0)
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_dryer.svg')}}">
                                 Geen droger
                             </div>
                             <hr>
                         @else
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/dryer.svg')}}">
                                 Droger
                             </div>
                             <hr>
                         @endif
                         @if (($Location->location_dishwasher) == 0)
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/no_dishwasher.svg')}}">
                                 Geen vaatwasser
                             </div>
                             <hr>
                         @else
                             <div class="panel-body-location-details">
-                                <img class="location-icons" src="{{URL::to('/img/icons/v2/bus.svg')}}">
+                                <img class="location-icons" src="{{URL::to('/img/icons/v2/dishwasher.svg')}}">
                                 Vaatwasser
                             </div>
                             <hr>
                         @endif
-                        @if (($Location->location_publictransport) == 0)
+                        {{-- @if (($Location->location_publictransport) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_bus.svg')}}">
                                 Geen OV station dichtbij
@@ -256,7 +255,7 @@
                                 OV station dichtbij
                             </div>
                             <hr>
-                        @endif
+                        @endif --}}
                         @if (($Location->location_smoking) == 0)
                             <div class="panel-body-location-details">
                                 <img class="location-icons" src="{{URL::to('/img/icons/v2/no_smoking.svg')}}">

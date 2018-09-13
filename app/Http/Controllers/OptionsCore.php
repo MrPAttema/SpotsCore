@@ -88,10 +88,10 @@ class OptionsCore extends Controller
 
         $onderhoudweek = $request->onderhoudweek;
 
-        dd($onderhoudweek);
         $date = Carbon::createFromDate($jaar, 1, 1, 'Europe/Amsterdam');
         $end_date = $date->endOfYear();
-        $max_weeks = $end_date->subDays(3);
+        $max_weeks = $date->week();
+        dd($max_weeks);
         $weeks_total = ($max_weeks->weekOfYear);
 
         DB::statement("CREATE TABLE occupied_weeks_$jaar LIKE occupied_weeks");

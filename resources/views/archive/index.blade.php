@@ -50,113 +50,113 @@
 
         <div class="column col-9 col-md-9" id="default-results">
         @if ($res_year > 1)
-        <div class="margin-15">
-            <h3>
-                Uw archief overzicht voor {{$res_year}}
-            </h3>
-        </div>
+            <div class="margin-15">
+                <h3>
+                    Uw archief overzicht voor {{$res_year}}
+                </h3>
+            </div>
         @else
-        <div class="margin-15">
-            <h3>
-                Uw archief overzicht
-            </h3>
-        </div>
+            <div class="margin-15">
+                <h3>
+                    Uw archief overzicht
+                </h3>
+            </div>
         @endif
-            @if (count($records) > 0)
-                @foreach ($records as $Record)
-            <div class="panel panel-default">
-                <div class="panel-heading-adminreserveringen" style="cursor:pointer">
-                    @if ($Record->tax_status == 1)
-                        <i class="fa fa-circle" style="color: #00abff; " aria-hidden="true"></i>
-                    @elseif ($Record->payment_status == 1)
-                        <i class="fa fa-circle" style="color: green; " aria-hidden="true"></i>
-                    @elseif ($Record->res_status == 1)
-                        <i class="fa fa-circle" style="color: orange; " aria-hidden="true"></i>
-                    @elseif ($Record->payment_status == 0)
-                        <i class="fa fa-circle" style="color: red; " aria-hidden="true"></i>
-                    @endif
-                    Reserveringsnummer: #{{$Record->id}} - Toegewezen: {{$Record->res_toegewezen_week}}
-                </div>
-                <div class="panel-body-adminreserveringen" style="display:none;">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Week 1</th>
-                            <th>Week 2</th>
-                            <th>Week 3</th>
-                            <th>Naam</th>
-                            <th>Betalen</th>
-                            <th>Betalen</th>
-                        </tr>
-                        <tr>
-                            <td>{{$Record->res_week1}}</td>
-                            <td>{{$Record->res_week2}}</td>
-                            <td>{{$Record->res_week3}}</td>
-                            <td>{{$Record->firstname}} {{$Record->lastname}}</td>
-                            <td>
-                                <form method="post" action="{{ action('TouristtaxController@index') }}">
-                                    @if ($Record->payment_status == 0)
-                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
-                                        <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
-                                        <input type="hidden" id="is_archive" name="is_archive" value="1">
-                                        <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Toeristenbelasting betalen</button>
-                                    @elseif ($Record->payment_status == 1)
-                                        <!-- NIETS LATEN DOEN -->
-                                    @elseif ($Record->payment_status == 2)
-                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
-                                        <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
-                                        <input type="hidden" id="is_archive" name="is_archive" value="1">
-                                        <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Toeristenbelasting betalen</button>
-                                    @endif
-                                    {{ csrf_field() }}
-
-						        </form>
-                            </td>
-                            <td>
-                                <form method="post" action="{{ action('PaymentsController@TouristtaxPayment') }}">
-							
-                                    @if ($Record->payment_status == 0)
-                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
-                                        <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
-                                        <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Huur betalen</button>
-                                    @elseif ($Record->payment_status == 1)
-                                        <!-- NIETS LATEN DOEN -->
-                                    @elseif ($Record->payment_status == 2)
-                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
-                                        <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
-                                        <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Huur betalen</button>
-                                    @endif
-                                    {{ csrf_field() }}
-
-						        </form>
-                            </td>
-                        </tr>
-                        {{ method_field('patch') }}
-                    </table>
-                    <div class="payment-status-adminreserveringen">
-                        <div class="reservation-number">
-                        @if ($Record->tax_status == 0)
-                                Toeristenbelasting: <span style="color: red; font-weight: 500;">Niet Betaald</span>
-                            @elseif ($Record->tax_status == 1)
-                                Toeristenbelasting: <span style="color: green; font-weight: 500;">Betaald</span>
-                                <span>{{ Carbon\Carbon::parse($Record->updated_at)->format('d M Y - H:i') }}</span>
-                            @elseif ($Record->tax_status == 2)
-                                Toeristenbelasting: <span style="color: green; font-weight: 500;">Betaling afgebroken</span>
+        @empty ($records)
+            @foreach ($records as $Record)
+                <div class="panel panel-default">
+                    <div class="panel-heading-adminreserveringen" style="cursor:pointer">
+                        @if ($Record->tax_status == 1)
+                            <i class="fa fa-circle" style="color: #00abff; " aria-hidden="true"></i>
+                        @elseif ($Record->payment_status == 1)
+                            <i class="fa fa-circle" style="color: green; " aria-hidden="true"></i>
+                        @elseif ($Record->res_status == 1)
+                            <i class="fa fa-circle" style="color: orange; " aria-hidden="true"></i>
+                        @elseif ($Record->payment_status == 0)
+                            <i class="fa fa-circle" style="color: red; " aria-hidden="true"></i>
                         @endif
-                        </div>
-                        <div class="reservation-number">
-                        @if ($Record->payment_status == 0)
-                                Huurbetaling: <span style="color: red; font-weight: 500;">Niet Betaald</span>
-                            @elseif ($Record->payment_status == 1)
-                                Huurbetaling: <span style="color: green; font-weight: 500;">Betaald</span>
-                                <span>{{ Carbon\Carbon::parse($Record->payment_time)->format('d M Y - H:i') }}</span>
-                            @elseif ($Record->payment_status == 2)
-                                Huurbetaling: <span style="color: red; font-weight: 500;">Betaling afgebroken</span>
-                        @endif
+                        Reserveringsnummer: #{{$Record->id}} - Toegewezen: {{$Record->res_toegewezen_week}}
+                    </div>
+                    <div class="panel-body-adminreserveringen" style="display:none;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Week 1</th>
+                                <th>Week 2</th>
+                                <th>Week 3</th>
+                                <th>Naam</th>
+                                <th>Betalen</th>
+                                <th>Betalen</th>
+                            </tr>
+                            <tr>
+                                <td>{{$Record->res_week1}}</td>
+                                <td>{{$Record->res_week2}}</td>
+                                <td>{{$Record->res_week3}}</td>
+                                <td>{{$Record->firstname}} {{$Record->lastname}}</td>
+                                <td>
+                                    <form method="post" action="{{ action('TouristtaxController@index') }}">
+                                        @if ($Record->payment_status == 0)
+                                            <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
+                                            <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
+                                            <input type="hidden" id="is_archive" name="is_archive" value="1">
+                                            <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Toeristenbelasting betalen</button>
+                                        @elseif ($Record->payment_status == 1)
+                                            <!-- NIETS LATEN DOEN -->
+                                        @elseif ($Record->payment_status == 2)
+                                            <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
+                                            <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
+                                            <input type="hidden" id="is_archive" name="is_archive" value="1">
+                                            <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Toeristenbelasting betalen</button>
+                                        @endif
+                                        {{ csrf_field() }}
+
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="{{ action('PaymentsController@TouristtaxPayment') }}">
+                                
+                                        @if ($Record->payment_status == 0)
+                                            <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
+                                            <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
+                                            <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Huur betalen</button>
+                                        @elseif ($Record->payment_status == 1)
+                                            <!-- NIETS LATEN DOEN -->
+                                        @elseif ($Record->payment_status == 2)
+                                            <input type="hidden" id="reservation_id" name="reservation_id" value="{{$Record->id}}">
+                                            <input type="hidden" id="location_id" name="location_id" value="{{$Record->location_id}}">
+                                            <button type="submit" class="btn btn-primary submit-btn col-xs-12 margin-5"><i class="fa fa-credit-card" aria-hidden="true"></i> Huur betalen</button>
+                                        @endif
+                                        {{ csrf_field() }}
+
+                                    </form>
+                                </td>
+                            </tr>
+                            {{ method_field('patch') }}
+                        </table>
+                        <div class="payment-status-adminreserveringen">
+                            <div class="reservation-number">
+                            @if ($Record->tax_status == 0)
+                                    Toeristenbelasting: <span style="color: red; font-weight: 500;">Niet Betaald</span>
+                                @elseif ($Record->tax_status == 1)
+                                    Toeristenbelasting: <span style="color: green; font-weight: 500;">Betaald</span>
+                                    <span>{{ Carbon\Carbon::parse($Record->updated_at)->format('d M Y - H:i') }}</span>
+                                @elseif ($Record->tax_status == 2)
+                                    Toeristenbelasting: <span style="color: green; font-weight: 500;">Betaling afgebroken</span>
+                            @endif
+                            </div>
+                            <div class="reservation-number">
+                            @if ($Record->payment_status == 0)
+                                    Huurbetaling: <span style="color: red; font-weight: 500;">Niet Betaald</span>
+                                @elseif ($Record->payment_status == 1)
+                                    Huurbetaling: <span style="color: green; font-weight: 500;">Betaald</span>
+                                    <span>{{ Carbon\Carbon::parse($Record->payment_time)->format('d M Y - H:i') }}</span>
+                                @elseif ($Record->payment_status == 2)
+                                    Huurbetaling: <span style="color: red; font-weight: 500;">Betaling afgebroken</span>
+                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
         @else
             <div class="panel">
                 <div class="panel-heading margin-15">

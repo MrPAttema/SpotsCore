@@ -25,8 +25,8 @@
             <div class="divider"></div>
             <div class="columns col-oneline col-gapless">
                 <div class="column col-6 col-xs-12">
-                    <form class="" action="/reservations/new/steptwo" method="post">
-                        @foreach ($location as $Location)
+                    @foreach ($location as $Location)
+                    <form class="" action="/reservations/new/steptwo/" method="get">
                             @if (($autotoewijzen) == 0)
                                 <div class="panel-heading-accomodation"><h2>{{$Location->location_name}}, {{$Location->location_location}}</h2>
                             @else
@@ -49,16 +49,17 @@
                                 <option selected hidden value="">Maak een keuze</option>
                                 @if (($res_yearOld) > 0)
                                     <option value="{{$res_yearOld}}">{{$res_yearOld}}</option>
+                                    <option value="{{$res_year}}">{{$res_year}}</option>
+                                @else
+                                    <option value="{{$res_year}}">{{$res_year}}</option>
                                 @endif
-                                <option value="{{$res_year}}">{{$res_year}}</option>
                             </select>
                         </div>
-                        <button type="post" class="btn btn-primary post_year submit-btn bottom-10"><i class="fa fa-arrow-right" aria-hidden="true"></i> Verder naar stap 2</button>
-                        <input name="location_id" type="hidden" value="{{$Location->id}}"></input>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-primary post_year submit-btn bottom-10"><i class="fa fa-arrow-right" aria-hidden="true"></i> Verder naar stap 2</button>
+                        <input type="hidden" name="location_id" value="{{$Location->id}}">
                         </div>
-                        @endforeach
                     </form>
+                    @endforeach
                 </div>
                 <div class="column col-6 col-xs-12">
                     <img class="location-image" src="/img/locations/{{$Location->location_name}}/{{$Location->location_name}}2.jpg">

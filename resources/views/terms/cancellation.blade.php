@@ -7,22 +7,26 @@
 
             <div class="margin-15">
                 <h3>
-                    Annulerings Voorwaarden
+                    Huurvoorwaarden
                 </h3>
             </div>
     
             <div class="panel panel-default">
                 <div class="panel-body-voorwaarden-privacy margin-15">
-                    <p>Laatst gewijzigd: 1 april 2017</p>
-                    <p>Bij Mijn Belboei handteren wij een aantal voorwaarden met betrekking tot het annuleren van een reservering. Wij willen een duidelijk en zo transapart mogelijk beleid voeren als het aan komt op annuleringen. Hieronder vind u de regels en voorwaarden.</p>
+                    <p>Laatst gewijzigd: 15 september 2018</p>
+                    <p>
+                        Hieronder vind u de regels en de huurvoorwaarden. Door ontvangst van deze huurovereenkomst bij een reservering verklaren de huurders dat zij:
+                    </p>
                     <ul>
-                      <li>Accommodatiekosten (het totale nachttarief dat je moet betalen) worden zoals hieronder beschreven onder bepaalde omstandigheden terugbetaald.</li>
-                      <li>Als er een klacht is, moet Mijn Belboei binnen 24 (vier-en-twintig) uur na het inchecken op de hoogte worden gesteld.</li>
-                      <li>Een reservering is pas officieel geannuleerd wanneer je op de annuleerknop van de annulerings bevestigingspagina klikt, deze vind je op je Mijn Reserveringen > Reservering annuleren.</li>
-                      <li>Wil je een volledige restitutie van de accommodatiekosten dan moet je ten minste 14 (veertien) dagen voor de inchecktijd annuleren.</li>
-                      <li>Als de gast minder dan 14 (viertien) dagen van tevoren annuleert, wordt de eerste nacht niet terugbetaald. Maar 50% van de accommodatiekosten voor de resterende nachten zal worden terugbetaald.</li>
-                      <li>Als de gast arriveert en besluit om eerder te vertrekken, dan wordt 50% van de accommodatie kosten voor de niet-verbleven nachten terugbetaald, 24 uur nadat de reservering is geannuleerd.</li>
-                      <li>Op toeristenbelasting valt geen ristitutie. Deze dient na verblijf ingevuld te worden. De huurder, dient, ookal is men korter dan de officieele verblijfstijd verbleven, deze op te geven met het aantal personen dat orgineel van plan was om te verblijven in de accomodatie.</li>
+                        <li>Met de ligging en inrichting van het gehuurde op de hoogte zijn en daarvan geen nadere omschrijving verlangen.</li>
+                        <li>Het gehuurde zelf zullen bewonen en niet aan derden in gebruik of huur af mogen staan.</li>
+                        <li>Het gehuurde gebruiken als vakantieverblijf en dit niet met meer dan zes personen te zullen bewonen.</li>
+                        <li>Alle breuk, beschadigingen, vermissingen aan het huis, inventaris, sanitair en omliggend terrein, onmiddellijk voor eigen rekening herstellen.</li>
+                        <li>Verplicht zijn het gehuurde keurig te bewonen en schoon op te leveren.</li>
+                        <li>Zich onthouden van graven in het omliggende terrein.</li>
+                        <li>Bij niet nakomen van de voornoemde punten 4-5-6, zal voor rekening van de huurder herstel plaatsvinden, na overleg met deze huurder.</li>
+                        <li>Het gazon rond het huis zo mogelijk  zullen maaien en bijhouden.</li>
+                        <li>Annulering van deze overeenkomst kan alleen binnen 14 dagen na dagtekening alleen via de mail aan: Vakantieverblijven-MCL@ZNB.nl U dient zelf voor een annuleringsverzekering te zorgen.</li>
                     </ul>
                     <br>
                 </div>

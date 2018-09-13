@@ -50,6 +50,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('PriceCommand')
         ->everyMinute();
 
+        $schedule->command('DeleteLogData')
+        ->everyMinute();
+
         $schedule->command('ArchiveCommand')
         ->yearly();
     }
