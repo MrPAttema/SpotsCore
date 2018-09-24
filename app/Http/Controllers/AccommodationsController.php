@@ -23,8 +23,9 @@ class AccommodationsController extends Controller
       $ronde1 = DB::table('options')->where('id', 3)->value('value');
       $ronde2 = DB::table('options')->where('id', 4)->value('value');
       $touristTax = DB::table('options')->where('id', 14)->value('value');
-    //   dd($locations);
-      return view('accomodations.all', compact('locations', 'autotoewijzen', 'ronde1', 'ronde2', 'touristTax'));
+      $openYear = DB::table('options')->where('id', 12)->value('value');
+
+      return view('accomodations.all', compact('locations', 'autotoewijzen', 'ronde1', 'ronde2', 'touristTax', 'openYear'));
   }
 
 }

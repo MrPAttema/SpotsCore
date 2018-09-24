@@ -81,7 +81,7 @@ class UserController extends Controller
         App\User::where('id', $currentUserID)->update([
             'firstname' => Crypt::encrypt($request->firstname),
             'lastname' => Crypt::encrypt($request->lastname),
-            'email' => Crypt::encrypt($request->email),
+            'email' => $request->email,
             'phone' => Crypt::encrypt($request->phone),
             'adress' => Crypt::encrypt($request->adress),
             'postcode' => Crypt::encrypt($request->postcode),

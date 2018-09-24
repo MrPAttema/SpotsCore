@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Carbon\Carbon;
+use App\Loggings;
 
 class DeleteLogData extends Command
 {
@@ -11,7 +13,7 @@ class DeleteLogData extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'DeleteLogData';
 
     /**
      * The console command description.
@@ -38,22 +40,21 @@ class DeleteLogData extends Command
     public function handle()
     {
         $date = Carbon::now();
-		$currentWeek = $date->weekOfYear;
-		$currentYear = $date->year;
-		$reservations = Reservation::with('touristtax', 'user')->get();
-		foreach ($reservations as $reservation){    
-			$user_id = $reservation->user_id;
-            $reminderWeek = $reservation->res_toegewezen_week +2;
-			if ($currentYear == $reservation->res_year) {
-                if ($reservation->res_status == 1) {
-                    if ($reservation->touristtax->tax_status == 0) {
-                        if ($currentWeek >= ($reminderWeek) && ($reservation->res_toegewezen_week > 0)) {
-                            $user = User::find($user_id);
-                            $user->notify(New PaymentWarning());
-                        }
-                    }
-                }
-			}
-		}
+        $logs = Loggings::get();
+        dd($logs);
+		// foreach ($reservations as $reservation){    
+		// 	$user_id = $reservation->user_id;
+        //     $reminderWeek = $reservation->res_toegewezen_week +2;
+		// 	if ($currentYear == $reservation->res_year) {
+        //         if ($reservation->res_status == 1) {
+        //             if ($reservation->touristtax->tax_status == 0) {
+        //                 if ($currentWeek >= ($reminderWeek) && ($reservation->res_toegewezen_week > 0)) {
+        //                     $user = User::find($user_id);
+        //                     $user->notify(New PaymentWarning());
+        //                 }
+        //             }
+        //         }
+		// 	}
+		// }
     }
 }

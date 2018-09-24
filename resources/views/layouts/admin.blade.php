@@ -141,6 +141,7 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
 
 </body>
 </html>

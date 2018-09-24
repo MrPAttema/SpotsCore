@@ -23,7 +23,6 @@ class ReservationAssign extends Notification
     public function __construct($reservation)
     {
         $this->reservation = $reservation;
-        dd($this->reservation);
     }
 
     /**
@@ -46,18 +45,13 @@ class ReservationAssign extends Notification
     public function toMail($notifiable)
     {  
         $appName = config('app.name');
-        if (!is_array($this->reservation)) {
-            foreach ($this->reservation as $reservation) {
-            }
-        } else {
-            $reservation = (object) $this->reservation;
-        }
-        
-        $locations = DB::table('locations')->where('id', $reservation->location_id)->get()->toArray();
-        $locations = array_shift($locations);
-        $location = (object) $locations;
-        $reservationID = $reservation->id;
-        $locationEnterDay = $location->change_day;
+
+        $reservation = $this->reservation;
+
+        // dd($reservation->location);
+
+        $reservationID = $reservation->reservation_id;
+        $locationEnterDay = $reservation->location['change_day'];
         if ($locationEnterDay == 6) {
             Carbon::setWeekStartsAt(Carbon::SATURDAY);
             Carbon::setWeekEndsAt(Carbon::SATURDAY);
@@ -70,7 +64,10 @@ class ReservationAssign extends Notification
         
         $carbon->setISODate($reservation->res_year, $reservation->res_toegewezen_week);
         $enterDate = $carbon->startOfWeek()->format('d-m-Y');
-        $exitDate = $carbon->addWeek()->format('d-m-Y');          
+        $exitDate = $carbon->addWeek()->format('d-m-Y');   
+
+        $terms = storage_path('app/public/voorwaarden.pdf');
+        $locationDocuments = storage_path('app/public/'.$reservation->location['location_name'].'.pdf');        
             
         $url = url('/reservations/myreservations');
         return (new MailMessage)
@@ -79,19 +76,27 @@ class ReservationAssign extends Notification
             ->line('Met deze email willen wij u op de hoogste stellen dat de status van uw reservering met reserveringnummer #'.$reservationID.' is veranderd naar "toegewezen".')
             ->line('Wij hopen dat u een goed verblijft heeft.')
             ->line('<b>Hieronder vind uw een paar details over uw reservering:<b>')
-            ->line('<b>Verblijf: </b>'.$location->location_name)
-            ->line('<b>Locatie: </b>'.$location->location_location)
-            ->line('<b>Adres: </b>'.$location->location_adress .''. $location->location_housenumber .''. $location->location_specials)
-            ->line('<b>Postcode: </b>'.$location->location_postcode)
-            ->line('<b>Aankomst na: </b>'.$location->location_entertime.', op ' .$enterDate)
-            ->line('<b>Vertrek voor: </b>'.$location->location_exittime. ', op ' .$exitDate)
+            ->line('<b>Verblijf: </b>'.$reservation->location['location_name'])
+            ->line('<b>Locatie: </b>'.$reservation->location['location_location'])
+            ->line('<b>Adres: </b>'.$reservation->location['location_adress'] .' '. $reservation->location['location_housenumber'] .' '. $reservation->location['location_specials'])
+            ->line('<b>Postcode: </b>'.$reservation->location['location_postcode'])
+            ->line('<b>Aankomst na: </b>'.$reservation->location['location_entertime'].', op ' .$enterDate)
+            ->line('<b>Vertrek voor: </b>'.$reservation->location['location_exittime']. ', op ' .$exitDate)
             ->line('Wij zullen u altijd op de hoogte houden door middel van een email van status wijzigingen op uw account.')
-            ->line('Graag wijzen wij u op het feit dat de huur tenminste 14 dagen voor vertrek door ons ontvangen moet zijn.')
+            ->line('Graag wijzen wij u op het feit dat de huur tenminste 30 dagen voor vertrek door ons ontvangen moet zijn.')
             ->line('Uw reservering kunt u middels iDeal op '.$appName.' betalen door op de onderstaande knop te gebruiken. Uiteraard kan dat ook op een later moment als u deze mail bewaard.')
             ->action('Betaal huur', $url)
             ->line('De toeristenbelasting dient na terugkomst van uw verblijf te worden betaald, hier krijg u na uw verblijf automatisch een herinnering over.')
+            ->line('Bijgaand in deze email vind u nog; de Huurvoorwaarden, (indien uw reservering is betaald) uw factuur en een bijlage met informatie over uw verblijfslocatie.')
             ->line('U kunt tijdens kantooruren de sleutel afhalen bij de ontvangstbalie van .., .., .. te Leeuwarden.')
             ->line('Deze email is automatisch verstuurd, u kunt hier niet op reageren.')
+            ->attachData($terms, "Huurvoorwaarden.pdf", [
+                'mime' => 'application/pdf',
+            ])
+            ->attachData($locationDocuments, $reservation->location['location_name'] .'.pdf', [
+                'mime' => 'application/pdf',
+            ])
+            ->bcc('vakantieverblijven-mcl@znb.nl')
             ->success();    
     }
 

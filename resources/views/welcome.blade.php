@@ -243,7 +243,7 @@
                 @if (Route::has('login'))
                     <div class="links col-12">
                         <a class="btn btn-primary col-md-1" href="{{ url('/login') }}">Inloggen</a>
-                        <a class="btn col-md-1" href="{{ url('/register') }}">Registreren</a>
+                        {{-- <a class="btn col-md-1" href="{{ url('/register') }}">Registreren</a> --}}
                     </div>
                 @endif
 

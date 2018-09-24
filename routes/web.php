@@ -161,6 +161,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/options', 'OptionsCore@index');
     Route::patch('/admin/options', 'OptionsCore@updateSettings');
     Route::post('/admin/options', 'OptionsCore@newyear');
+    Route::post('/admin/encrypt', 'OptionsCore@userEncrypter')->name('user_encrypt');
 
     //////////////////////////////// ADMIN USERS
     Route::get('/admin/accounts', 'AdminUserController@index');
@@ -173,10 +174,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin', 'AdminIndexController@index')->name('admin.home');
 });
 
-Route::group(['middleware' => 'auth:balie'], function () {
+// Route::group(['middleware' => 'auth:balie'], function () {
 
-    //////////////////////////////// BALIE
-    Route::get('/balie', 'BalieController@index');
-    Route::post('/balie/update', 'BalieController@update');
+//     //////////////////////////////// BALIE
+//     Route::get('/balie', 'BalieController@index');
+//     Route::post('/balie/update', 'BalieController@update');
 
-});
+// });

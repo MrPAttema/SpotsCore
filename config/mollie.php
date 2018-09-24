@@ -34,8 +34,8 @@ return [
     'test_mode' => env('MOLLIE_TEST_MODE', true),
 
     'keys' => [
-        'live' => env('MOLLIE_KEY_LIVE', 'live_SfV5g8yEkM6P5QyjjAFdemfwHu23eF'),
-        'test' => env('MOLLIE_KEY_TEST', 'test_TUcMguWMsm6AWWN5rSTsD8SW26W3sw'),
+        'live' => env('MOLLIE_KEY_LIVE', 'live_kS2EkNqHw2Txu9tNSfvkkf4zp2v'),
+        'test' => env('MOLLIE_KEY_TEST', 'test_44cUD6F2kwQ4AvK2SK9Jf4guJKpEqS'),
     ],
 
     // Place the following in the 'config/services.php'

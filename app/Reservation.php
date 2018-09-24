@@ -47,4 +47,6 @@ class Reservation extends Model
     {
         return $this->hasOne('App\Touristtax', 'reservation_id', 'reservation_id');
     }
+
+    
 }

@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         '\App\Console\Commands\PaymentWarningCommand',
         '\App\Console\Commands\TaxReminderCommand',
         '\App\Console\Commands\OpenAndCloseCommand',
-        '\App\Console\Commands\PriceCommand',
+        '\App\Console\Commands\DeleteLogData',
     ];
 
     /**
@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule) {
 
-        $schedule->command('TaxReminderCommand')
-        ->weekly()->mondays()->at('08:30');
+        // $schedule->command('TaxReminderCommand')
+        // ->weekly()->mondays()->at('08:30');
 
         $schedule->command('PaymentWarningCommand')
         ->weekly()->mondays()->thursdays()->at('08:30');
@@ -45,9 +45,6 @@ class Kernel extends ConsoleKernel
         ->everyTenMinutes();
 
         $schedule->command('OpenAndCloseCommand')
-        ->everyMinute();
-
-        $schedule->command('PriceCommand')
         ->everyMinute();
 
         $schedule->command('DeleteLogData')

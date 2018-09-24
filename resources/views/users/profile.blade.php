@@ -38,23 +38,14 @@
                     @php
                         $user = (object) $user;
                         $firstname = decrypt($user->firstname);
-                        $lastname = decrypt($user->lastname);
-                        $email = decrypt($user->email);
-                        if ($user->adress == null) {
-                            $adress = '';
-                            $phone = '';
-                            $postcode = '';
-                            $city = '';         
-                            $work_location = '';
-                            $work_department = '';
-                        } else {
-                            $adress = decrypt($user->adress);
-                            $phone = decrypt($user->phone);
-                            $postcode = decrypt($user->postcode);
-                            $city = decrypt($user->city);         
-                            $work_location = decrypt($user->work_location);
-                            $work_department = decrypt($user->work_department);
-                        }
+                        $lastname = empty($user->lastname) ? '' : decrypt($user->lastname);
+                        $email = $user->email;
+                        $adress = empty($user->adress) ? '' : decrypt($user->adress);
+                        $phone = empty($user->phone) ? '' : decrypt($user->phone);
+                        $postcode = empty($user->postcode) ? '' : decrypt($user->postcode);
+                        $city = empty($user->city) ? '' : decrypt($user->city);
+                        $work_location = empty($user->work_location) ? '' : decrypt($user->work_location);
+                        $work_department = empty($user->work_location) ? '' : decrypt($user->work_location);
                     @endphp
                     <form class="user-panel" method="post">
                         <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">

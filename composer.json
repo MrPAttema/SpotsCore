@@ -14,7 +14,9 @@
         "milon/barcode": "^5.3",
         "torann/geoip": "^1.0",
         "nesbot/carbon": "2.0.0-beta.4 as 1.25.0",
-        "kylekatarnls/laravel-carbon-2": "^1.0.0"
+        "kylekatarnls/laravel-carbon-2": "^1.0.0",
+        "maatwebsite/excel": "^3.0",
+        "cyber-duck/laravel-excel": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

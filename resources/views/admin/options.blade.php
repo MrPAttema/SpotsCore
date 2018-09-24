@@ -292,6 +292,25 @@
                     
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading-meldingen">Encrypt alle gebruikers</div>
+
+                 <div class="panel-body-adminreserveringen">
+                    <form class="form-horizontal" method="POST" action="{{ route('user_encrypt') }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Uitvoeren
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>        
+
         </div>
     </div>
 </div>

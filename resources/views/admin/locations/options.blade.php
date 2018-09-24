@@ -13,7 +13,7 @@
 <div class="container">
     <div class="columns">
         @foreach($locations as $location)
-            <div class="column col-4 col-xs-12">
+            <div class="column col-4 col-md-12">
                 <div class="card margin-15">
                     <div class="card-header">
                         <div class="card-title h5">{{$location->location_name}}, {{$location->location_location}}</div>

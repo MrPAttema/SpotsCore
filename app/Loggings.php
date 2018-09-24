@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Loggings extends Model
 {
+    protected $table = 'logging';
+    
     protected $fillable = [
         'user_id', 
         'phone', 

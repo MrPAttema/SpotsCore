@@ -167,6 +167,8 @@ return [
         Mollie\Laravel\MollieServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Cyberduck\LaravelExcel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -214,6 +216,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
@@ -240,5 +243,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];

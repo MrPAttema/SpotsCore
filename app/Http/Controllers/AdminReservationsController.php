@@ -9,6 +9,7 @@ use Illuminate\Pagination\Paginator;
 use App\Adminreservations;
 use App\Reservation;
 use App\User;
+use App\Priorities;
 use App;
 use Crypt;
 use Carbon\Carbon;
@@ -51,23 +52,24 @@ class AdminReservationsController extends Controller
                 'res_status' => 1,
             ]);
 
+            $reservation = App\Reservation::with('payment', 'touristtax', 'location', 'user')->where('id', $id)->get()->toArray();
+            $reservation = array_shift($reservation);
+            $reservation = (object) $reservation;
+
             DB::table("occupied_weeks_$boekingsjaar")->where('week', $request->input('toegewezen'))->update(['bezet' => 1]);
 
             $user_id = App\Reservation::where('id', $id)->value('user_id');
             $user = User::find($user_id);
-            (new User)->forceFill([
-                'id' => $user->id,
-                'email' => Crypt::decrypt($user->email),
-            ])->notify(New ReservationAssign($submission));
+            $user->notify(New ReservationAssign($reservation));
 
-            Session::flash('message', 'Reservering #'. $id .' is geupdate.');
+            $request->session()->flash('message', 'Reservering #'. $id .' is geupdate.');
             return redirect('/admin/allreservations');
 
         } else {
 
-            $toegewezen =  $request->input('toegewezen');
+            $toegewezen = $request->input('toegewezen');
             
-            Session::flash('error', 'Week '. $toegewezen .' is al uitgegeven.');
+            $request->session()->flash('error', 'Week '. $toegewezen .' is al uitgegeven.');
             return redirect('/admin/allreservations'); 
 
         }	
@@ -76,6 +78,7 @@ class AdminReservationsController extends Controller
     public function autoAssign(Request $request) {
 
         $currentYear = Carbon::now();
+
         $res_year = DB::table('options')->where('id', 1)->value('value');
 
         $resWeek = $request->input('round');
@@ -98,83 +101,58 @@ class AdminReservationsController extends Controller
             break;
         }
         
-        for ($x = 0; $x <= 53; $x++) {
+        $reservations = App\Reservation::with('user')->orderBy($resWeek)->where('res_year', $res_year)->where('deleted', null)->where('res_status', 0)->get();
 
-            $reservations = App\Reservation::where('res_year', $res_year)->where($resWeek, $x)->where('deleted', null)->where('res_status', 0)->get()->toArray();
-            
-            if (!empty($reservations)) {
-                
-                if (count($reservations) == 1) {
-                    
-                    // $reservation = $reservations;
-                    
-                    // $reservation = array_shift($reservation);
-                    
-                    // $weekcheck = DB::table("occupied_weeks_$res_year")->where('week', $reservation[$resWeek])->value('bezet');
-                    
-                    // if ($weekcheck == 0) {
-                        
-                        //     $submission = App\Reservation::where('id', $reservation['id'])->update([
-                            //         'res_toegewezen_week' => $reservation[$resWeek],
-                            //         'res_status' => 1,
-                            //     ]);
-                            
-                            //     DB::table("occupied_weeks_$res_year")->where('week', $reservation[$resWeek])->update(['bezet' => 1]);
-                            
-                            //     $user_id = App\Reservation::where('id', $reservation['user_id'])->value('user_id');
-                            //     $user = User::find($user_id);
-                            //     $user->notify(New ReservationAssign($reservation));
-                            // }  
-                            
-                } else {
-                    
-                    dd($reservations);
+        foreach ($reservations as $reservation) {
+         
+            $priority = DB::table('priorities')->where('employee_id', $reservation->user->employee_id)->get()->toArray();
 
-                    $reservation = $reservations;
+            $priority = array_shift($priority);
 
-                    $reservation = array_shift($reservation);
+            $count = 0;
 
-                    $weekcheck = DB::table("occupied_weeks_$res_year")->where('week', $reservation[$resWeek])->value('bezet');
-                    
-                    if ($weekcheck == 0) {
-
-                        $currentYear = $reservation['res_year'];
-                        $reservationsArchive = DB::table('reservation_archives')->where('user_id', $reservation['user_id'])->get()->toArray();
-                        $reservationsArchive = array_shift($reservationsArchive);
-                        
-                        $reservationsOld = DB::table('reservations_old')->where('employee_id', '102367')->get()->toArray();
-                        // $reservationsOld = array_shift($reservationsOld);
-                        
-                        $count = 0;
-                        $currentYear = 2018;  
-
-                        for ($year = 2011; $year <= $currentYear; $year++) {
-
-                            foreach ($reservationsOld as $reservationOld) {
-
-                                dump($reservationOld->$year);
-                                                            
-                                if ($reservationOld->employee_id == 'UIT') {
-                                    $count++;
-                                }
-                            }
-
+            if(isset($priority)) {
+                if (end($priority) === 'IN') {
+                    $count = 1;
+                } else {            
+                    foreach ($priority as $priorityType) {
+                        if ($priorityType === 'UIT') {
+                            $count++;
+                        } elseif (($priorityType === 'IN') || ($priorityType === '0')) {
+                            $count = 0;
                         }
-
-                        // $submission = App\Reservation::where('id', $reservation['id'])->update([
-                        //     'res_toegewezen_week' => $reservation[$resWeek],
-                        //     'res_status' => 1,
-                        // ]);
-
-                        // DB::table("occupied_weeks_$res_year")->where('week', $reservation[$resWeek])->update(['bezet' => 1]);
-
-                        // $user_id = App\Reservation::where('id', $reservation['user_id'])->value('user_id');
-                        // $user = User::find($user_id);
-                        // $user->notify(New ReservationAssign($reservation));             
-                    }  
+                    }
                 }
             }
+            if ($count === 0) {
+                $count++;
+            }
+            $priority = $count;
+            
+            $reservation->priority = $priority;    
+
+            $reservation = json_decode(json_encode($reservation),true);
+
+            $reservations_all[] = $reservation;
+        }
+        
+        $reservations_all = collect($reservations_all)->sortBy('priority')->reverse()->toArray();
+
+        $freeWeeks = DB::table("occupied_weeks_$res_year")->where('bezet', 0)->get()->toArray();
+        
+        $count = count($freeWeeks);
+ 
+        for ($x = 0; $x <= $count; $x++) {
+            
+            
+
         } 
+
+        dump($reservations_all);
+        
+        exit;
+
+        
         // return redirect('/admin/options');              
     }
 
@@ -190,10 +168,7 @@ class AdminReservationsController extends Controller
 
         $user_id = App\Reservation::where('id', $reservation_id)->value('user_id');
         $user = User::find($user_id);
-        (new User)->forceFill([
-            'id' => $user->id,
-            'email' => Crypt::decrypt($user->email),
-        ])->notify(New ReservationRejected($submission));
+        $user->notify(New ReservationRejected($submission));
 
         Session::flash('message', 'Reservering #'. $reservation_id .' is afgewezen.');
         return redirect('/admin/allreservations');
@@ -211,10 +186,7 @@ class AdminReservationsController extends Controller
 
         $user_id = App\Reservation::where('id', $reservation_id)->value('user_id');
         $user = User::find($user_id);
-        (new User)->forceFill([
-            'id' => $user->id,
-            'email' => Crypt::decrypt($user->email),
-        ])->notify(New ReservationCancelled($submission));
+        $user->notify(New ReservationCancelled($submission));
 
         Session::flash('message', 'Reservering #'. $reservation_id .' is geannuleerd.');
         return redirect('/admin/allreservations');

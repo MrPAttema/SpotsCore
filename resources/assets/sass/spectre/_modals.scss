@@ -31,8 +31,7 @@
 
     .modal-container {
       animation: slide-down .2s ease 1;
-      max-width: 840px;
-      min-width: 70%;
+      width: 840px !important;
       z-index: $zindex-0;
     }
   }

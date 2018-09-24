@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Reservations');
     }
 
+    public function priorities()
+    {
+        return $this->hasOne('App\Priorities');
+    }
+
     public function loggings()
     {
         return $this->hasMany('App\Loggings');
@@ -72,7 +77,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
 }

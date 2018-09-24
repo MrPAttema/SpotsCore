@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="column col-6 col-xs-12 centered">
+    <div class="column col-6 col-md-12 centered">
         <div class="margin-15">
             <h3>
                 Nieuw reservering
@@ -31,7 +31,7 @@
                     <form method="post" action="/reservations/new/save" class="user-panel">
                         <div class="form-group">
                             <label for="email">E-mailadres:</label>
-                            <input required type="text" name="email" value="{{ Crypt::decrypt(Auth::user()->email) }}">
+                            <input required type="text" name="email" value="{{ Auth::user()->email }}">
                         </div>
                         <div class="form-group">
                             <label for="phone">Telefoonnummer (Mobiel):</label>
@@ -50,7 +50,7 @@
                             <input style="text-transform:uppercase" required type="text" name="postcode" value="{{ Crypt::decrypt(Auth::user()->postcode) }}">
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="email">Werkomgeving:</label>
                             <select class="select work" name="work_location">
                                 @if (Auth::user()->work_location == null)
@@ -64,7 +64,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="email">Afdeling:</label>
                             <input required type="text" name="work_department" value="{{Crypt::decrypt(Auth::user()->work_department) }}">
                         </div> --}}

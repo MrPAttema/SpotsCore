@@ -4,29 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Reservation;
-use App\Payment;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable;
-use App\Notifications\PaymentAdvanceReminder;
-use Crypt;
-
-class PaymentAdvanceReminderCommand extends Command
+class NoRebookingCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'PaymentAdvanceReminderCommand';
+    protected $signature = 'NoRebookingCommand';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Remind users who havent paid rent, to do before leave.';
+    protected $description = 'If a user cancels, and the week does not get rebooked. The first user needs to pay 50% of the original bookingcost.';
 
     /**
      * Create a new command instance.

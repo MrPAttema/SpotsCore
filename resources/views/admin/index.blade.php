@@ -20,9 +20,7 @@
                 <div class="panel-body-adminreserveringen">
                     Huidig boekingsjaar: <b>{{$boekingsjaar}}</b>
                     <hr>
-                    Aantal geregistreerde gebruikers: <b>{{$users->id}}</b>
-                    <br>
-                    Laatste gebruikersregistratie: <b>{{$users->created_at}}</b>
+                    Aantal geregistreerde gebruikers: <b>{{count($users)}}</b>
                 </div>
             </div>
         </div>

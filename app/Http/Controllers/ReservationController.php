@@ -88,8 +88,16 @@ class ReservationController extends Controller
             $amount_low = DB::table('locations')->where('id', $location_id)->value('location_price_low');
             $amount_normal = DB::table('locations')->where('id', $location_id)->value('location_price');
             $amount_high = DB::table('locations')->where('id', $location_id)->value('location_price_high');
+
+            $carbon = Carbon::now();
+
+            $currentWeek = $carbon->weekOfYear;
             
             foreach ($occupiedWeeks as $week) {
+                // dd($week);
+                if ($currentWeek >= $week->week) {
+                    continue;
+                }
                 if (in_array($week->week, $datesLow) == true) {
                     $week->type = " - (Actieweek)";
                 } else if (in_array($week->week, $datesHigh) == true) {
@@ -99,7 +107,7 @@ class ReservationController extends Controller
                 }
                 array_push($weeks, $week);
             }
-
+            
             return view('reservations.new_steptwo', compact('weeks', 'datesHigh', 'amount_low','amount_high', 'res_year', 'location', 'location_id', 'ronde1', 'ronde2', 'touristTax', 'enterDate', 'exitDate', 'taxtype'));
 
         } else {
@@ -310,7 +318,6 @@ class ReservationController extends Controller
             ]);
 
             App\User::where('id', $user_id)->update([
-                'email' => encrypt($request['email']),
                 'phone' => encrypt($request['phone']),
                 'adress' => encrypt($request['adress']),
                 'postcode' => encrypt($request['postcode']),
@@ -324,10 +331,7 @@ class ReservationController extends Controller
             $reservation->touristtax()->save($touristtax);
 
             $user = User::find($user_id);
-            (new User)->forceFill([
-                'id' => $user->id,
-                'email' => Crypt::decrypt($user->email),
-            ])->notify(New MadeReservation($reservation));
+            $user->notify(New MadeReservation($reservation));
 
 
             return redirect('/reservations/myreservations');

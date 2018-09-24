@@ -68,7 +68,7 @@ class LoginController extends Controller
         $login_type = $this->getLoginType($loginValue);
 
         if ($login_type == 'email') {
-            $loginValue = Crypt::encrypt($loginValue);
+            $loginValue = $loginValue;
         } 
 
         //Change request type based on user input

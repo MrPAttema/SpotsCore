@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use App;
 use App\Options;
 use DB;
+use App\User;
 use Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class OptionsCore extends Controller
 {
@@ -90,14 +92,12 @@ class OptionsCore extends Controller
 
         $date = Carbon::createFromDate($jaar, 1, 1, 'Europe/Amsterdam');
         $end_date = $date->endOfYear();
-        $max_weeks = $date->week();
-        dd($max_weeks);
-        $weeks_total = ($max_weeks->weekOfYear);
+        $max_weeks = $date->isoWeeksInYear();
 
         DB::statement("CREATE TABLE occupied_weeks_$jaar LIKE occupied_weeks");
         DB::insert(DB::raw("INSERT INTO occupied_weeks_$jaar SELECT * FROM occupied_weeks GROUP BY ID"));
 
-        if ($weeks_total == 52){
+        if ($max_weeks == 52){
 
             DB::table("occupied_weeks_$jaar")->where('week', 53)->update(['bezet' => 1]);
 
@@ -135,6 +135,30 @@ class OptionsCore extends Controller
         DB::table('options')->where('id', 1)->update(['value' => $jaar]);
         $request->session()->flash('message', 'Nieuw boekingsjaar aangemaakt.');
 
+        return redirect('/admin/options');
+    }
+
+    public function userEncrypter(Request $request) {
+
+        $users = User::get()->toArray();
+        $number = 0;
+        foreach ($users as $user) {
+            $number ++;
+            if ($number > 2) {
+                User::where('id', $user['id'])->update([
+                    'firstname' => Crypt::encrypt($user['firstname']),
+                    'lastname' => Crypt::encrypt($user['lastname']),
+                    'phone' => Crypt::encrypt($user['phone']),
+                    'adress' => Crypt::encrypt($user['adress']),
+                    'postcode' => Crypt::encrypt($user['postcode']),
+                    'city' => Crypt::encrypt($user['city']),
+                    'work_location' => Crypt::encrypt($user['work_location']),
+                    'password' => bcrypt($user['password']),
+                ]);
+            }
+        }
+
+        $request->session()->flash('message', 'Encryptie successvol.');
         return redirect('/admin/options');
     }
 

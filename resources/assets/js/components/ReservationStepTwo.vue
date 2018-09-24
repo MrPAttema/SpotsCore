@@ -2,43 +2,42 @@
     <div class="vue-element">
         <div class="column col-12 col-xs-12">
             <div class="form-group">
-                <div class="">
-                    <div class="form-group">
-                        <label for="resWeekOne">Selecteer uw eerste week:</label>
-                        <select name="weekOne" v-model="weekOne" @change="getPriceData()">
-                            <option :value="week.week" v-for="week in weeks" :key="week.id">{{week.week}} {{week.type}}</option>
-                        </select>
-                    </div>
-                    <div v-if="checked === false">
-                        <div class="form-group" v-if="ronde1 === 1">
-                            <label for="resWeekTwo">Selecteer uw tweede week:</label>
-                            <select name="weekTwo" v-model="weekTwo" @change="getPriceDataTwo()">
-                                <option :value="0">Geen voorkeur</option>
-                                <option :value="week.week" v-for="week in weeks" :key="week.id">{{week.week}} {{week.type}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-12">
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="two_weeks_together" @click="check($event)">
-                            <i class="form-icon"></i> Reserveer twee weken achter elkaar.
-                            <div class="popover popover-bottom">
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                <div class="popover-container">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <div class="card-title h5">
-                                                Weken samenvoegen.
-                                            </div>
+                <div class="form-group col-12">
+                    <label class="form-checkbox">
+                        <input type="checkbox" name="two_weeks_together" @click="check($event)">
+                        <i class="form-icon"></i> Reserveer twee weken achter elkaar.
+                        <div class="popover popover-bottom">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <div class="popover-container">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title h5">
+                                            Weken samenvoegen.
                                         </div>
-                                        <div class="card-body">
-                                            Indien u deze optie aan vinkt maken wij van beide week één reservering.
-                                            U kiest uw eerste week, wij plakken er daarna een aan vast.
-                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        Indien u deze optie aan vinkt maken wij van beide week één reservering.
+                                        U kiest uw eerste week, wij plakken er daarna een aan vast.
                                     </div>
                                 </div>
                             </div>
-                        </label>
+                        </div>
+                    </label>
+                </div>
+                <div class="divider text-center"></div>
+                <div class="form-group">
+                    <label for="resWeekOne">Selecteer uw eerste week:</label>
+                    <select name="weekOne" v-model="weekOne" @change="getPriceData()">
+                        <option :value="week.week" v-for="week in weeks" :key="week.id">{{week.week}} {{week.type}}</option>
+                    </select>
+                </div>
+                <div v-if="checked === false">
+                    <div class="form-group" v-if="ronde1 === 1">
+                        <label for="resWeekTwo">Selecteer uw tweede week:</label>
+                        <select name="weekTwo" v-model="weekTwo" @change="getPriceDataTwo()">
+                            <option :value="0">Geen voorkeur</option>
+                            <option :value="week.week" v-for="week in weeks" :key="week.id">{{week.week}} {{week.type}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -70,6 +69,7 @@
                 <hr>
                 Totaal: <b>&euro; <span name="totalprice">{{ totalPrice }}</span></b>
                 <br>
+                <i>Er wordt nog niets in rekening gebracht.</i>
                 <hr>
             </div>
         </div>

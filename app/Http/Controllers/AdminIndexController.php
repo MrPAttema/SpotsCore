@@ -22,7 +22,7 @@ class AdminIndexController extends Controller
 
   public function index()
   {
-        $users = DB::table('users')->orderBy('created_at', 'desc')->first();
+        $users = DB::table('users')->get();
         $boekingsjaar = DB::table('options')->where('id', 1)->value('value');
         $reservations = App\Reservation::with('payment', 'touristtax', 'location')->orderBy('created_at', 'desc')->get();
         $softwareKey = DB::table('options')->where('id', 7)->value('value');

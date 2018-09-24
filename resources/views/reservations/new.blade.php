@@ -31,7 +31,7 @@
                                 <div class="panel-heading-accomodation"><h2>{{$Location->location_name}}, {{$Location->location_location}}</h2>
                             @else
                             <div class="panel-heading-accomodation"><h2>{{$Location->location_name}}, {{$Location->location_location}}</h2> 
-                            <div class="get-direct-text"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i> Open reservering, reserveer een overgebleven week.</div>
+                            <div class="get-direct-text">Na betaling krijg u direct uw toewijzing voor deze locatie.</div>
                             @endif
                         </div>
 
@@ -44,9 +44,9 @@
                         <p>Kies het jaar waarvoor u een boeking wilt maken. In de volgende stap kunt u uw voorkeursweken voor de reservering door geven.</p>
                         <hr>
                         <div class="form-group">
-                            <label for="res_year">Selecteer een jaar:</label>
+                            <label for="res_year">Selecteer een boekingsjaar:</label>
                             <select  name="res_year">
-                                <option selected hidden value="">Maak een keuze</option>
+                                <option selected hidden value="">Maak uw selectie</option>
                                 @if (($res_yearOld) > 0)
                                     <option value="{{$res_yearOld}}">{{$res_yearOld}}</option>
                                     <option value="{{$res_year}}">{{$res_year}}</option>

@@ -65,6 +65,19 @@ $(document).ready(function () {
     });
 });
 
+$(function() {
+  $("#allReservations").tablesorter();
+});
+
+$(document).ready(function () {
+    $("#allZoeken").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#allReservations tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
 // $(document).ready(function () {
 //     $('select[name=res_week1]').change(function () {
 //         var obj = $('select[name=res_week1]').val();

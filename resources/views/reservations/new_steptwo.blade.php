@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="column col-6 col-xs-12 centered">
+    <div class="column col-6 col-md-12 centered">
         <div class="margin-15">
             <h3>
                 Nieuw reservering

@@ -9,19 +9,13 @@
         </div>
     <div class="columns centered col-oneline col-12 col-sm-12">
         <div class="column col-2 col-sm-2">
-            <form method="post" class="form-toewijzen" action="{{ action('SearchController@inputSearch') }}">
             <div class="search-bar">
                 <div class="input-group">
-                        <input autofocus type="text" class="search" placeholder="Trefwoord.." name="keyword">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="input-group-btn">
-                            <button id="search-admin-reservations" class="btn btn-default search" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
+                    <input autofocus type="text" class="search" id="allZoeken" placeholder="Zoeken" name="keyword">
                 </div>
-            </form>
+            </div>
             {{-- <form method="POST" class="" action="{{ action('SearchController@inputStatus') }}" --}}
-                <div class="status-search">
+                {{-- <div class="status-search">
                     <div class="status-sorting">
                         <span><b>Status</b></span>
                         <hr>
@@ -30,14 +24,90 @@
                         <a value="" href="unpaid" class="btn btn-link search-list-item">Niet Betaald</a>
                         <a value="" href="assigned" class="btn btn-link search-list-item">Toegewezen</a>
                         <a value="" href="rejected" class="btn btn-link search-list-item">Afgewezen</a>
-                    </div>
-                </div> 
+                    </div>  --}}
+            </div>
         </div>
 
-        <div class="column col-10 col-sm-12">
+        <div class="column col-12 col-sm-12">
 
-        {{ $reservations->links() }}
-            @foreach ($reservations as $Reservation)
+            
+
+            <table class="table table-striped table-hover" id="allReservations">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>ID</th>
+                        <th>Naam</th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                        <th>Toewijzen</th>
+                        <th>Actie</th>
+                        <th>Betaling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reservations as $Reservation)
+                        <tr>
+                            <td> 
+                                @if (($Reservation->touristtax->tax_status == 1) && ($Reservation->payment->payment_status == 1))
+                                    <span class="label label-rounded label-primary">Afgehandeld</span>
+                                @elseif (($Reservation->touristtax->tax_status == 1) || ($Reservation->payment->payment_status == 1))
+                                    <span class="label label-rounded label-success">Huur voldaan</span>
+                                @elseif ($Reservation->res_status == 1)
+                                    <span class="label label-rounded label-warning">Toegewezen</span>
+                                @elseif ($Reservation->payment->payment_status == 0)
+                                    <span class="label label-rounded label-error">Niet toegewezen</span>
+                            @endif
+                            </td>
+                            <td>{{$Reservation->reservation_id}}</td>
+                            <td>{{Crypt::decrypt($Reservation->user->firstname)}} {{Crypt::decrypt($Reservation->user->lastname)}}</td>
+                            <td>{{$Reservation->res_week1}}</td>
+                            <td>{{$Reservation->res_week2}}</td>
+                            <td>
+                                @if ($Reservation->res_toegewezen_week == 0)
+                                <form method="post" class="form-toewijzen" action="{{ url('/admin/allreservations') }}">
+                                    <input required="" type="text-small" size="2" value="" name="toegewezen"></input>
+                                    <input type="hidden" value="{{$Reservation->id}}" name="reservation_id"></input>
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn button"> Toewijzen</button>
+                                </form>
+                                @else
+                                    {{$Reservation->res_toegewezen_week}}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($Reservation->res_toegewezen_week == 0)
+                                    <form class="form-toewijzen" action="{{ url('/admin/allreservations/reject') }}" method="post">
+                                        <input type="hidden" value="{{$Reservation->id}}" name="reservation_id"></input>
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn button"> Reservering afwijzen</button>
+                                    </form>
+                                @else
+                                    <form class="form-toewijzen" action="{{ url('/admin/allreservations/cancel') }}" method="post">
+                                        <input type="hidden" value="{{$Reservation->id}}" name="reservation_id"></input>
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn button"> Reservering annuleren</button>
+                                    </form>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($Reservation->payment->payment_status == 0)
+                                Huurbetaling: <span style="color: red; font-weight: 500;">Niet Betaald</span>
+                                @elseif ($Reservation->payment->payment_status == 1)
+                                    Huurbetaling: <span style="color: green; font-weight: 500;">Betaald</span>
+                                    <span>{{ Carbon\Carbon::parse($Reservation->payment->payment_time)->format('d M Y - H:i') }}</span>
+                                @elseif ($Reservation->payment->payment_status == 2)
+                                    Huurbetaling: <span style="color: red; font-weight: 500;">Betaling afgebroken</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        
+            {{-- @foreach ($reservations as $Reservation)
             <div class="panel panel-default">
                 <div class="panel-heading-adminreserveringen" style="cursor:pointer">
                     @if (($Reservation->touristtax->tax_status == 1) && ($Reservation->payment->payment_status == 1))
@@ -83,7 +153,7 @@
                         </td>
                         <td>
                             @if ($Reservation->res_toegewezen_week == 0)
-                                <form class="form-toewijzen" action="{{ url('/admin/allreservations/rejected') }}" method="post">
+                                <form class="form-toewijzen" action="{{ url('/admin/allreservations/reject') }}" method="post">
                                     <input type="hidden" value="{{$Reservation->id}}" name="reservation_id"></input>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <button type="submit" class="btn button"> Reservering afwijzen</button>
@@ -123,11 +193,7 @@
                 </div>
             </div>
         </div>
-        @endforeach
-
-        <div class="col-md-9" id="search-results" style="display: block;">
-            
-        </div>
+        @endforeach --}}
 
         {{ $reservations->links() }}
 

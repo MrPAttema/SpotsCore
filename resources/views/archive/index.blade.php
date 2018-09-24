@@ -63,6 +63,17 @@
             </div>
         @endif
         @empty ($records)
+            <div class="panel">
+                <div class="panel-heading margin-15">
+                    <img class="empty-state" src="{{URL::asset('img/home_empty.svg')}}"/>
+                    <span class="empty-state-text">Welkom in het archief.</span>
+                    <span class="empty-state-text-under">Er staan nog geen reservering in het archief.</span>
+                    <span class="empty-state-text-under">Het archief word gevult aan het einde van elk jaar.</span>
+                    <span class="empty-state-text-under">Dit onder voorwaarde dat u een boeking heeft gedaan.</span>
+
+                </div>
+            </div>
+        @else
             @foreach ($records as $Record)
                 <div class="panel panel-default">
                     <div class="panel-heading-adminreserveringen" style="cursor:pointer">
@@ -157,23 +168,11 @@
                     </div>
                 </div>
             @endforeach
-        @else
-            <div class="panel">
-                <div class="panel-heading margin-15">
-                    <img class="empty-state" src="{{URL::asset('img/home_empty.svg')}}"/>
-                    <span class="empty-state-text">Welkom in het archief.</span>
-                    <span class="empty-state-text-under">Er staan nog geen reservering in het archief.</span>
-                    <span class="empty-state-text-under">Het archief word gevult aan het einde van elk jaar.</span>
-                    <span class="empty-state-text-under">Dit onder voorwaarde dat u een boeking heeft gedaan.</span>
-
-                </div>
-            </div>
         @endif
 
         <div class="col-md-9" id="search-results" style="display: block;">
             
         </div>
-
 
     </div>
 </div>

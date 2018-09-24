@@ -35,10 +35,8 @@
                         <span>Wisseldag is: <b>Zaterdag</b></span>
                     @endif
                     <div class="card-subtitle text-gray">
-                        @if (($autotoewijzen) == 0)
-                            {{--    --}}
-                        @else
-                            <i>Deze locatie krijgt u direct toegewezen.</i>
+                        @if (($autotoewijzen) == 1)
+                            <i>Deze locatie krijgt u direct toegewezen na betaling.</i>
                         @endif
                     </div>
                 </div>    
@@ -56,6 +54,9 @@
                         @if($ronde1 == 1 || $ronde2 == 1)
                         <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-right" aria-hidden="true"></i> Reservering aanvragen</button>
                         @else
+                        <div class="card-subtitle text-gray">
+                            <i>Reservering opent op {{ Carbon\Carbon::parse($openYear)->format('d-m-Y - H:i') }}</i>
+                        </div>
                         <button type="button" class="btn button-warning"><i class="fa fa-ban" aria-hidden="true"></i> Geen reservering mogelijk</button>
                         @endif
                         <button type="button" class="btn modal-open" id="{{$Location->id}}"><i class="fa fa-info" aria-hidden="true"></i> Details</button>
@@ -300,6 +301,11 @@
                             <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}1.jpg" style="width:100%">
                             <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}2.jpg" style="width:100%">
                             <img src="{{URL::to('/')}}/img/locations/{{$Location->location_name}}/{{$Location->location_name}}3.jpg" style="width:100%">
+                        </div>
+                        <div class="right-text">
+                            <p>
+                                {{$Location->location_description}}
+                            </p>
                         </div>
                     </div>
                 </div>
