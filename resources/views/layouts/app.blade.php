@@ -67,7 +67,7 @@
                 @if (Auth::guest())
                     {{--  --}}
                 @else                       
-                    <a class="btn btn-link-mobile dropdown-toggle badge" data-badge="{{$messageCount}}" tabindex="0" href="#" class="dropdown-toggle" >{{ Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                    <a class="btn btn-link-mobile dropdown-toggle" {{-- data-badge="{{$messageCount}}" --}} tabindex="0" href="#" class="dropdown-toggle" >{{ Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                 @endif
                     
                     <ul class="menu">
@@ -76,15 +76,15 @@
                             <a href="{{ url('/users/profile') }}"><i class="fa fa-user" aria-hidden="true"></i>
                                 Mijn profiel
                             </a>
-                            @if ($messageCount === 0)
+                            {{-- @if ($messageCount === 0)
                                 <a href="{{ url('/users/inbox') }}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
                                     Mijn Berichten
                                 </a>
-                            @else
+                            @else --}}
                                 <a class="badge" href="{{ url('/users/inbox') }}"><i class="fa fa-envelope-square" aria-hidden="true"></i>
                                     Mijn Berichten
                                 </a>
-                            @endif
+                            {{-- @endif --}}
                             <a href="{{ url('/users/privacy') }}"><i class="fa fa-lock" aria-hidden="true"></i>
                                 Veiligheid
                             </a>
@@ -172,7 +172,7 @@
                 @if (Auth::guest())
                     {{--  --}}
                 @else
-                    <a class="btn btn-link dropdown-toggle badge" data-badge="{{$messageCount}}" tabindex="0" href="#" class="dropdown-toggle" >{{  Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                    <a class="btn btn-link dropdown-toggle" {{-- data-badge="{{$messageCount}}" --}} tabindex="0" href="#" class="dropdown-toggle" >{{  Crypt::decrypt(Auth::user()->firstname) }} {{ Crypt::decrypt(Auth::user()->lastname) }} <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                 @endif     
                 <ul class="menu">
                     <li class="divider" data-content="Profiel"></li>

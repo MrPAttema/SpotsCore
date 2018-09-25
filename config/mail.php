@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'bestuur@belboeivlieland.com',
-        'name' => 'Mijn Belboei',
+        'address' => 'bestuur@vvmcl.com',
+        'name' => 'VVMCL',
     ],
 
     /*

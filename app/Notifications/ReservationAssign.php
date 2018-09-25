@@ -88,7 +88,7 @@ class ReservationAssign extends Notification
             ->action('Betaal huur', $url)
             ->line('De toeristenbelasting dient na terugkomst van uw verblijf te worden betaald, hier krijg u na uw verblijf automatisch een herinnering over.')
             ->line('Bijgaand in deze email vind u nog; de Huurvoorwaarden, (indien uw reservering is betaald) uw factuur en een bijlage met informatie over uw verblijfslocatie.')
-            ->line('U kunt tijdens kantooruren de sleutel afhalen bij de ontvangstbalie van .., .., .. te Leeuwarden.')
+            ->line('U kunt tijdens kantooruren de sleutel afhalen bij de servicebalie nabij de hoofdingang van het MCL te Leeuwarden.')
             ->line('Deze email is automatisch verstuurd, u kunt hier niet op reageren.')
             ->attachData($terms, "Huurvoorwaarden.pdf", [
                 'mime' => 'application/pdf',

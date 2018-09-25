@@ -147,13 +147,8 @@ class AdminReservationsController extends Controller
             
 
         } 
-
-        dump($reservations_all);
         
-        exit;
-
-        
-        // return redirect('/admin/options');              
+        return view('admin.allreservations', compact('reservations', 'results'));             
     }
 
     public function reject(Request $request){

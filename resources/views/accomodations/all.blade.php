@@ -295,6 +295,8 @@
                             {{-- <img class="location-icons" src="{{URL::to('/img/icons/v2/dubblebed.svg')}}"> --}}
                             1 tweepersoonsbed
                         </div>
+                        <hr>
+                        {{$Location->location_bed_details}}
                     </div>
                     <div class="content-right">
                         <div class="slideshow-container">

@@ -92,10 +92,9 @@ class ReservationController extends Controller
             $carbon = Carbon::now();
 
             $currentWeek = $carbon->weekOfYear;
-            
+
             foreach ($occupiedWeeks as $week) {
-                // dd($week);
-                if ($currentWeek >= $week->week) {
+                if ($res_year == $carbon->year && $currentWeek >= $week->week) {
                     continue;
                 }
                 if (in_array($week->week, $datesLow) == true) {

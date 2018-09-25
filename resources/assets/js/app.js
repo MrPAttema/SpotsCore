@@ -54,12 +54,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('.modal-open').click(function () {
-        $('.modal').addClass('active');
-    });
-});
-
-$(document).ready(function () {
     $(".mobileIcon").click(function () {
         $(".mobile-menu").toggle();
     });
